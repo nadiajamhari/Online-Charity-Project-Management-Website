@@ -1,0 +1,73 @@
+.card-header{
+    background-color:rgb(255, 139, 112);
+    color: white
+}
+
+form{
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+.row, .form-row{
+    margin-left: 6rem;
+    margin-right: 6rem;
+}
+#tittle{
+    background-color:#fde8a1;
+    text-align: center;
+    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 20px;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+
+}
+table{
+    width:80%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    margin: auto;
+    
+}
+
+th{
+    background-color: #fde8a1;
+    text-align: center;
+    font-weight: 700;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: grey solid 1px;
+}
+
+
+tbody tr td{
+    padding-left:10px;
+    padding-right: 10px;
+    border:grey solid 1px;
+    table-layout: fixed;
+    text-overflow: ellipsis;
+}
+
+tfoot{
+    border: grey solid 1px;
+}
+
+tfoot td{
+    padding-right:10px;
+}
+
+.table-remove{
+    text-align:center;
+    width: 95px;
+}
+#objective{
+    width: 75%;
+}
+
+button{
+    margin-top:.5rem;
+    margin-bottom: .5rem;
+}
+
+
+

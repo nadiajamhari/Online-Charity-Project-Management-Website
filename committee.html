@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+
+    <!-- pop-up delete message
+      <link data-require="bootstrap-css@3.1.1" data-semver="3.1.1" rel="stylesheet" 
+      href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" /> -->
+
+    <link rel="stylesheet" type="text/css" href="layout.css">
+       <title>Volunteer</title>
+</head>
+
+<body>
+
+    <header>
+
+      <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+       
+        <div class="msidenav">
+          <li id="nav-item">
+            <a href="profile.html"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                <span>MY PROFILE</span></a>
+        </li>
+        <li id="nav-item">
+            <a href="project.html"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                <span>PROJECTS</span></a>
+        </li>
+        <li id="nav-item">
+            <a href="volunteer.html"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+                <span>VOLUNTEERS</span></a>
+        </li>
+        </div>
+
+        <div class="fsidenav">
+          <li id="nav-item">
+              <a href="#"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+              <span>SETTINGS</span></a>
+          </li>
+
+        </div>
+      </div>
+
+        
+        <div id="main">
+
+          <div class="topnav">
+              <a style="cursor:pointer" onclick="openNav()">&#9776;</a>
+              <a href="index.html"><img id="logo" src="logo.png" height="70px" class="d-inline-block align-top"
+                alt="logo"></a>
+  
+              <div class="topnav-right">
+  
+                  <a href="#">Logout</a>
+              </div>
+          </div>
+    </header>
+    
+
+    <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+          
+              <div class="modal-header">
+                  <h4 class="modal-title text-center" id="myModalLabel">Confirm Delete</h4>
+              </div>
+          
+              <div class="modal-body">
+                  <p>Do you really want to delete these records?</p>
+                  <p class="debug-url"></p>
+              </div>
+              
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                  <a class="btn btn-danger btn-ok">Delete</a>
+              </div>
+          </div>
+      </div>
+    </div>
+
+    <div id="main">
+      <h2 class="text-center">Volunteer Information</h2> 
+    <main class="container">
+      <h2 style="font-size: 5px;"><br></h2>
+      <!-- table -->
+      <div class="card">
+          <h3 style="background-color:rgb(255, 139, 112); color: white;"
+              class="card-header text-center font-weight-bold">List Of Volunteers</h3>
+          <div class="card-body">
+              <div id="table" class="table-editable">
+                  <table class="table table-bordered table-responsive-md table-striped text-center">
+
+                   <thead>
+                    <tr>
+                      <th class="text-center">Name</th>
+                      <th class="text-center">ID Number</th>
+                      <th class="text-center">Phone</th>
+                      <th class="text-center">Email</th>
+                      <th class="text-center">Address</th>
+                      <th class="text-center">Edit</th>
+                      <th class="text-center">Delete</th>
+                    </tr>
+                  </thead>
+      
+                  <tbody>
+                    <tr>
+                    <td>
+                        <span class="pt-3-half">Nur Farisha</span>
+                    </td>
+            
+                    <td>
+                        WIF2006041
+                    </td>
+            
+                    <td>
+                      0199993857
+                    </td>
+                    
+                    <td>
+                      haha@gmail.com
+                    </td>
+            
+                    <td>
+                      Jln Kelinci, 36020, Perak
+                    </td>
+
+                    <td> <!-- Edit button-->
+                      <span class="table-remove"><button class="btn-default btn-rounded btn-sm my-0"><i
+                                  class="glyphicon glyphicon-edit"></i></button></span>
+                     </td>
+
+                    <td> <!-- Delete button-->
+                      <button class="btn-danger btn-rounded btn-sm my-0" data-href="/delete.php?" data-toggle="modal"
+                          data-target="#confirm-delete"><i class="glyphicon glyphicon-trash"></i>
+                        </button> 
+                    </td>
+                    </tr>
+                  </tbody>  
+
+
+                  <tbody>
+                    <tr>
+                      <td>
+                        <span class="pt-3-half">Mohd Afiq</span>
+                       </td>
+            
+                      <td>
+                          WIF1814280
+                      </td>
+              
+                      <td>
+                        0112356741
+                      </td>
+                      
+                      <td>
+                        Mafiq91@gmail.com
+                      </td>
+              
+                      <td>
+                        Jln Manggis, 27085, Terengganu
+                      </td>
+
+                        <!-- Edit button-->
+                        <td>
+                          <span class="table-remove"><button class="btn-default btn-rounded btn-sm my-0"><i
+                                      class="glyphicon glyphicon-edit"></i></button></span>
+                        </td>
+                    
+                      <!-- Delete button-->
+                      <td>
+                      <!-- <span class="table-remove"> -->
+                        <button class="btn-danger btn-rounded btn-sm my-0" data-href="/delete.php?" data-toggle="modal"
+                          data-target="#confirm-delete"><i class="glyphicon glyphicon-trash"></i>
+                        </button>
+                      <!-- </span> -->
+                      </td>
+                    </tr>
+                  </tbody> 
+
+            </table>
+        </div>
+
+      
+
+        <!-- Add form -->
+        <span class="pull-right">
+          <div class="form-group col-md-6">
+              <a href="addNewCommittee.html">
+                  <button type="button" class="btn btn-info">
+                      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                      <span>Add New Committee</span>
+                  </button>
+              </a>
+          </div>
+      </span>
+</div>
+</div>
+    </main>
+
+   
+    <footer>
+        <div class="text-center">
+            MyCharity<br>
+    
+            © 2020 FCSIT. All Rights Reserved
+        </div>
+    </footer>
+    </div>
+
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+            document.getElementById("main").style.marginLeft = "250px";
+        }
+      
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+            document.getElementById("main").style.marginLeft = "0";
+        }
+
+       //pop-up delete message function
+        // $('#confirm-delete').on('show.bs.modal', function(e) {
+        //     $(this).find('.btn-ok').attr('href', $(e.relatedTarget).data('href'));
+            
+        //     $('.debug-url').html('Delete URL: <strong>' + $(this).find('.btn-ok').attr('href') + '</strong>');
+        // });
+      </script>
+      
+      
+     <!-- JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <!-- pop-up delete message 
+      <script data-require="jquery@*" data-semver="2.0.3" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+    <script data-require="bootstrap@*" data-semver="3.1.1" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+         -->
+    
+</body>
+</html>
+
+
