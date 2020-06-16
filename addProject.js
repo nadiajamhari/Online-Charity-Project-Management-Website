@@ -25,30 +25,30 @@ $(document).ready(function () {
 });
 
 // /add data into table committe old
-$(function () {
-    var data = document.getElementById("add");
-    data.addEventListener("click", Details);
+// $(function () {
+//     var data = document.getElementById("add");
+//     data.addEventListener("click", Details);
 
-    // var row=1;
+//     // var row=1;
 
-    function Details() {
+//     function Details() {
 
-        var committee = document.getElementById("rid").value;
-        var nmembers = document.getElementById("nmembers").value;
-        var pmember = document.getElementById("pmember").value;
+//         var committee = document.getElementById("rid").value;
+//         var nmembers = document.getElementById("nmembers").value;
+//         var pmember = document.getElementById("pmember").value;
 
-        var _tr = `<tr><td>${committee}</td>   <td>${nmembers}</td>   <td>${pmember}</td>    <td class="table-remove"><button type="button" <span class="btn-danger glyphicon glyphicon-remove delete" aria-hidden="true"></span></button></td></tr>`;
-        $('#tab1').append(_tr);
-    };
+//         var _tr = `<tr><td>${committee}</td>   <td>${nmembers}</td>   <td>${pmember}</td>    <td class="table-remove"><button type="button" <span class="btn-danger glyphicon glyphicon-remove delete" aria-hidden="true"></span></button></td></tr>`;
+//         $('#tab1').append(_tr);
+//     };
 
-    $(document).on('click', '.delete', function () {
-        $(this).closest('tr').remove(); 
+//     $(document).on('click', '.delete', function () {
+//         $(this).closest('tr').remove(); 
 
 
 
-    });
+//     });
 
-});
+// });
 
 
 
@@ -91,6 +91,15 @@ $(function () {
 
         var _tr = `<tr><td>${item1}</td>   <td>${income}</td>     <td><button type="button" <span class="btn-danger glyphicon glyphicon-remove delete3" aria-hidden="true"></span></button></td></tr>`;
         $('#tab4').append(_tr);
+
+        var table = document.getElementById("tab4"),sumVal;
+        for (var i =1; i < table.rows.length;i++){
+
+            sumVal = sumVal + table.rows[i].cell[1];
+
+        }
+
+        console.log(sumVal);
 
     };
 

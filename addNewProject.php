@@ -71,7 +71,7 @@
           <h3 class="card-header text-center font-weight-bold text-uppercase py-4">PROJECT FORM DETAILS</h3><br>
           <p class="alert alert-info">Please fill in this form to add a project. Required information is marked
             with an asterisk (*)</p>
-         <form action="addProject.php" method="post">
+         <form action="addNewProject.php" method="post">
 
 
             <div class="form-group row">
@@ -402,13 +402,6 @@
                 </datalist>
               </div>
               <div class="form-group col-md-4">
-                <label for="nmembers">Name</label>
-
-
-                <input type="text" name="NameMembers" class="form-control form-control-sm" id="nmembers">
-               
-              </div>
-              <div class="form-group col-md-4">
                 <label for="pmember">Position</label>
                 <select id="pmember" class="form-control form-control-sm" name="pmember">
                 <option value="Project Manager">Project Manager</option>
@@ -424,15 +417,11 @@
 
                 </select>
                 <div class="pull-right">
-                  <button type="button" id="add" class="btn-info"><span class="glyphicon glyphicon-plus"
+                  <button name="add" type="button" id="add" class="btn-info"><span class="glyphicon glyphicon-plus"
                        aria-hidden="true"></span></button></div>
               </div>
             </div>
 
-
-           
-
-       
 
           <div id="info">
 
@@ -550,8 +539,8 @@
 
 
 
-          <div class="pull-right"><a href="project.html"> <button type="button"
-                class="btn btn-secondary">Back</button></a>&nbsp;<button class="btn btn-info" type="submit" value="submit">Save</button></div></form>
+          <div class="pull-right"><a href="project.php"><button type="button"
+                class="btn btn-secondary">Back</button></a>&nbsp; <button class="btn btn-info" type="submit" value="submit">Save</button></a></div></form>
 
 
         </div>
