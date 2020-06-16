@@ -385,27 +385,21 @@
  
           <div class="form-row">
               <div class="form-group col-md-4">
-                <label for="rid">Register ID</label>
-                <input class="form-control form-control-sm" list="committee" id="rid" name="RegisterId">
+                <label for="nmembers">Name</label>
+                <input class="form-control form-control-sm" list="committee" id="nmembers" name="nmembers">
                 <datalist id="committee">
                 <?php
                 
-                $sql = "SELECT registerID FROM committee ORDER BY committeeID";
+                $sql = "SELECT name FROM committee ORDER BY committeeID";
                 $result = $conn->query($sql);
 
                 if($result->num_rows>0){
                 while($row=$result->fetch_assoc()){
-                  echo "<option value=\"".$row['registerID']."\">";
+                  echo "<option value=\"".$row['name']."\">";
                 }
               }
                ?>
                 </datalist>
-              </div>
-              <div class="form-group col-md-4">
-                <label for="nmembers">Name</label>
-
-
-                <input type="text" name="NameMembers" class="form-control form-control-sm" id="nmembers">
                
               </div>
               <div class="form-group col-md-4">
