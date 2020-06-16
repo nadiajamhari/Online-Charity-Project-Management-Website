@@ -387,19 +387,11 @@
               <div class="form-group col-md-4">
                 <label for="rid">Register ID</label>
                 <input class="form-control form-control-sm" list="committee" id="rid" name="RegisterId">
-                <datalist id="committee">
-                <?php
-                
-                $sql = "SELECT registerID FROM committee ORDER BY committeeID";
-                $result = $conn->query($sql);
-
-                if($result->num_rows>0){
-                while($row=$result->fetch_assoc()){
-                  echo "<option value=\"".$row['registerID']."\">";
-                }
-              }
-               ?>
-                </datalist>
+              </div>
+              <div class="form-group col-md-4">
+                <label for="nmembers">Name</label>
+                <input type="text" name="NameMembers" class="form-control form-control-sm" id="nmembers">
+               
               </div>
               <div class="form-group col-md-4">
                 <label for="pmember">Position</label>
@@ -540,7 +532,7 @@
 
 
           <div class="pull-right"><a href="project.php"><button type="button"
-                class="btn btn-secondary">Back</button></a>&nbsp; <button class="btn btn-info" type="submit" value="submit">Save</button></a></div></form>
+                class="btn btn-secondary">Back</button></a>&nbsp; <button class="btn btn-info" type="submit" value="submit">Save</button></a></div></form></a>
 
 
         </div>

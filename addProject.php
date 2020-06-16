@@ -49,16 +49,8 @@ else {
 }
 }
 
-if(isset($_POST["add"])){
-     $id = $_POST['RegisterID'];
-     $sql = "SELECT name FROM committee where registerID=$id";
-     $result = $conn->query($sql);
-     while($row=$result->fetch_assoc()){
-        $name = $row["name"];
-        echo "$name";
-                                      }
 
-             }
+     
 
 ?>
 
