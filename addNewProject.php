@@ -386,7 +386,7 @@
           <div class="form-row">
               <div class="form-group col-md-4">
                 <label for="nmembers">Name</label>
-                <input class="form-control form-control-sm" list="committee" id="nmembers" name="nmembers">
+                <input class="form-control form-control-sm" list="committee" id="nmembers"  name="namemembers">
                 <datalist id="committee">
                 <?php
                 
@@ -432,7 +432,6 @@
 
             <table id="tab1">
               <thead>
-                <th>Register ID</th>
                 <th>Name</th>
                 <th>Position</th>
                 <th class="table-remove">Action</th>
