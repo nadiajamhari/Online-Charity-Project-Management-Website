@@ -33,11 +33,10 @@ $(function () {
 
     function Details() {
 
-        var committee = document.getElementById("rid").value;
         var nmembers = document.getElementById("nmembers").value;
         var pmember = document.getElementById("pmember").value;
 
-        var _tr = `<tr><td>${committee}</td>   <td>${nmembers}</td>   <td>${pmember}</td>    <td class="table-remove"><button type="button" <span class="btn-danger glyphicon glyphicon-remove delete" aria-hidden="true"></span></button></td></tr>`;
+        var _tr = `<tr><td>${nmembers}</td>   <td>${pmember}</td>    <td class="table-remove"><button type="button" <span class="btn-danger glyphicon glyphicon-remove delete" aria-hidden="true"></span></button></td></tr>`;
         $('#tab1').append(_tr);
     };
 
