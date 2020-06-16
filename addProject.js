@@ -81,26 +81,15 @@ $(function () {
 $(function () {
     var data = document.getElementById("Add3");
     data.addEventListener("click", Details);
-  
+
     // var row=1;
 
     function Details() {
         var item1 = document.getElementById("item1").value;
         var income = document.getElementById("income").value;
-  
 
         var _tr = `<tr><td>${item1}</td>   <td>${income}</td>     <td><button type="button" <span class="btn-danger glyphicon glyphicon-remove delete3" aria-hidden="true"></span></button></td></tr>`;
         $('#tab4').append(_tr);
-
-        var table = document.getElementById("tab4"),sumVal;
-        for (var i =1; i < table.rows.length;i++){
-
-            sumVal = sumVal + table.rows[i].cell[1];
-
-        }
-
-        console.log(sumVal);
-
     };
 
     $(document).on('click', '.delete3', function () {

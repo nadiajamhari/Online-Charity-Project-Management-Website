@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link href="layout.css?v=<?php echo time(); ?>" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" type="text/css" href="layout.css">
   <link rel="stylesheet" type="text/css" href="addProject.css">
   <title>Add Project</title>
 </head>
@@ -71,7 +71,7 @@
           <h3 class="card-header text-center font-weight-bold text-uppercase py-4">PROJECT FORM DETAILS</h3><br>
           <p class="alert alert-info">Please fill in this form to add a project. Required information is marked
             with an asterisk (*)</p>
-         <form action="addProject.php" method="post">
+         <form action="addNewProject.php" method="post">
 
 
             <div class="form-group row">
@@ -387,9 +387,24 @@
               <div class="form-group col-md-4">
                 <label for="rid">Register ID</label>
                 <input class="form-control form-control-sm" list="committee" id="rid" name="RegisterId">
+                <datalist id="committee">
+                <?php
+                
+                $sql = "SELECT registerID FROM committee ORDER BY committeeID";
+                $result = $conn->query($sql);
+
+                if($result->num_rows>0){
+                while($row=$result->fetch_assoc()){
+                  echo "<option value=\"".$row['registerID']."\">";
+                }
+              }
+               ?>
+                </datalist>
               </div>
               <div class="form-group col-md-4">
                 <label for="nmembers">Name</label>
+
+
                 <input type="text" name="NameMembers" class="form-control form-control-sm" id="nmembers">
                
               </div>
@@ -409,11 +424,15 @@
 
                 </select>
                 <div class="pull-right">
-                  <button name="add" type="button" id="add" class="btn-info"><span class="glyphicon glyphicon-plus"
+                  <button type="button" id="add" class="btn-info"><span class="glyphicon glyphicon-plus"
                        aria-hidden="true"></span></button></div>
               </div>
             </div>
 
+
+           
+
+       
 
           <div id="info">
 
@@ -531,8 +550,8 @@
 
 
 
-          <div class="pull-right"><a href="project.php"><button type="button"
-                class="btn btn-secondary">Back</button></a>&nbsp; <button class="btn btn-info" type="submit" value="submit">Save</button></a></div></form></a>
+          <div class="pull-right"><a href="project.html"> <button type="button"
+                class="btn btn-secondary">Back</button></a>&nbsp;<button class="btn btn-info" type="submit" value="submit">Save</button></div></form>
 
 
         </div>
