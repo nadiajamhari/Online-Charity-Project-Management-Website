@@ -59,9 +59,9 @@ if(isset($_POST["add"])){
                                       }
 
              }
-$conn->close();
+
 ?>
-<?php include_once("pconfig.php");?>
+
 <!DOCTYPE html>
 <html lang="en">
 

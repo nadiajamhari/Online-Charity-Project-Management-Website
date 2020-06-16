@@ -71,7 +71,7 @@
           <h3 class="card-header text-center font-weight-bold text-uppercase py-4">PROJECT FORM DETAILS</h3><br>
           <p class="alert alert-info">Please fill in this form to add a project. Required information is marked
             with an asterisk (*)</p>
-         <form action="addNewProject.php" method="post">
+         <form action="addProject.php" method="post">
 
 
             <div class="form-group row">
