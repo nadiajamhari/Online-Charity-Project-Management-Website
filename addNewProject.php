@@ -12,8 +12,8 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="layout.css">
-  <link rel="stylesheet" type="text/css" href="addProject.css">
+    <link href="layout.css?v=<?php echo time(); ?>" rel="stylesheet" type="text/css" />
+    <link href="project.css?v=<?php echo time(); ?>" rel="stylesheet" type="text/css" />
   <title>Add Project</title>
 </head>
 
@@ -385,21 +385,14 @@
  
           <div class="form-row">
               <div class="form-group col-md-4">
+                <label for="rid">Register ID</label>
+                <input id="rid" type="text" class="form-control form-control-sm" name="RegisterId" placeholder="register id">
+              </div>
+              <div class="form-group col-md-4">
                 <label for="nmembers">Name</label>
-                <input class="form-control form-control-sm" list="committee" id="nmembers"  name="namemembers">
-                <datalist id="committee">
-                <?php
-                
-                $sql = "SELECT name FROM committee ORDER BY committeeID";
-                $result = $conn->query($sql);
 
-                if($result->num_rows>0){
-                while($row=$result->fetch_assoc()){
-                  echo "<option value=\"".$row['name']."\">";
-                }
-              }
-               ?>
-                </datalist>
+
+                <input type="text" name="NameMembers" class="form-control form-control-sm" id="nmembers">
                
               </div>
               <div class="form-group col-md-4">
@@ -432,6 +425,7 @@
 
             <table id="tab1">
               <thead>
+                <th>Register ID</th>
                 <th>Name</th>
                 <th>Position</th>
                 <th class="table-remove">Action</th>
