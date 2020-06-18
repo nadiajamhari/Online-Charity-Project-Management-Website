@@ -170,7 +170,6 @@ echo "<html><script> window.location.href=\"project.php\";</script></html>";
 }
 
 if(isset($_POST['updateProject'])){
-    echo "test";
 
 $projectID = $_POST['projectID'];
 $pname = $_POST["pname"]; 
@@ -181,41 +180,57 @@ $venue = $_POST["venue"];
 $country =$_POST["country"];
 
 //  insert part 1
-
 $sql = "UPDATE project SET projectName='$pname',startDate='$sdate',endDate='$edate', 
 participantLevel='$plevel',venue='$venue',country='$country' WHERE projectID=$projectID";
 
-if (mysqli_query($conn, $sql)) {
+ if (mysqli_query($conn, $sql)) {
   echo "Record updated successfully";
-} else {
-  echo "Error updating record: " . mysqli_error($conn);
-}
+ } else {
+   echo "Error updating record: " . mysqli_error($conn);
+ }
 
 //-------------------------------------------------
 //for objective
-if(isset($_POST["objective"])){
+$sql = "DELETE FROM objective WHERE projectID=$projectID";
 
-foreach ($_POST["objective"] as $objective){
+    if ($conn->query($sql) === TRUE) {
+      echo "Record deleted successfully1";
+    } else {
+      echo "Error deleting record: " . $conn->error;
+    }
+ if(isset($_POST["objective"])){
+
+
+
+  foreach ($_POST["objective"] as $objective){
     
     $o[]=$objective;
 
-}
+ }
 
-for ($i=0 ; $i<sizeof($o);$i++){
+ for ($i=0 ; $i<sizeof($o);$i++){
     $sql1 = "INSERT INTO objective (projectID, objective)
-VALUES ('$projectID','$o[$i]')";
+ VALUES ('$projectID','$o[$i]')";
 
-if($conn->query($sql1)===TRUE){
+ if($conn->query($sql1)===TRUE){
     // echo "New Record created successfully $count";
-}
-else {
+ }
+ else {
     echo "Error : " . $sql1 . "<br>" .$conn->error;
-}
-}
+ }
+ }
 }
 //--------------------------------------
 //commitee
-if(isset($_POST["ccname"]) && isset($_POST["ppmember"])){
+$sql = "DELETE FROM list_committee WHERE projectID=$projectID";
+
+    if ($conn->query($sql) === TRUE) {
+      echo "Record deleted successfully2";
+    } else {
+      echo "Error deleting record: " . $conn->error;
+    }
+ if(isset($_POST["ccname"]) && isset($_POST["ppmember"])){
+
 
     foreach ($_POST["ccname"] as $ccname){
         
@@ -242,9 +257,17 @@ if(isset($_POST["ccname"]) && isset($_POST["ppmember"])){
 }
 //--------------------------------------------------------------
 //agenda
+ $sql = "DELETE FROM agenda WHERE projectID=$projectID";
+
+    if ($conn->query($sql) === TRUE) {
+      echo "Record deleted successfully3";
+    } else {
+      echo "Error deleting record: " . $conn->error;
+    }
+
 
         if(isset($_POST["aadate"]) && isset($_POST["aatime"]) && isset($_POST["aactivity"])){
-
+    
             foreach ($_POST["aadate"] as $aadate){
                 
                 $a[]=$aadate;
@@ -274,8 +297,15 @@ if(isset($_POST["ccname"]) && isset($_POST["ppmember"])){
         }
         //------------------------------------------------//
         //income
+ $sql = "DELETE FROM income WHERE projectID=$projectID";
 
+        if ($conn->query($sql) === TRUE) {
+          echo "Record deleted successfully4";
+        } else {
+          echo "Error deleting record: " . $conn->error;
+        }
             if(isset($_POST["iitem1"]) && isset($_POST["iincome"])){
+          
 
                 foreach ($_POST["iitem1"] as $iitem1){
                     
@@ -301,9 +331,18 @@ if(isset($_POST["ccname"]) && isset($_POST["ppmember"])){
                 }
             }
 //----------------------------------------------------------------------
-//expenditure
+// expenditure
+$sql = "DELETE FROM expenditure WHERE projectID=$projectID";
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Record deleted successfully5";
+      } else {
+        echo "Error deleting record: " . $conn->error;
+      }
 
                 if(isset($_POST["iitem2"]) && isset($_POST["eexpenditure"])){
+
+                    
 
                     foreach ($_POST["iitem2"] as $iitem2){
                         
@@ -332,6 +371,3 @@ if(isset($_POST["ccname"]) && isset($_POST["ppmember"])){
     mysqli_close($conn);
     echo "<html><script> window.location.href=\"viewProject.php?id=$projectID\";</script></html>";
 }
-
-
-?>

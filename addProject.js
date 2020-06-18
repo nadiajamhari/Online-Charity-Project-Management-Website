@@ -120,6 +120,35 @@ $(function () {
 
 });
 
+// remove objective
+$(document).on('click', '.removeob', function () {
+    $(this).closest('tr').remove();
+
+});
+
+// remove committee
+$(document).on('click', '.removecommittee', function () {
+    $(this).closest('tr').remove();
+
+});
+
+// remove agenda
+$(document).on('click', '.removeagenda', function () {
+    $(this).closest('tr').remove();
+
+});
+
+// remove income
+$(document).on('click', '.removeincome', function () {
+    $(this).closest('tr').remove();
+
+});
+
+// remove expenditure
+$(document).on('click', '.removeexpenditure', function () {
+    $(this).closest('tr').remove();
+
+});
 
 //data into modal
 

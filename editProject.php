@@ -375,31 +375,27 @@ while ($row = $result->fetch_assoc())
    <option value="Zimbabwe">Zimbabwe</option>
                 </select>
               </div>
-            </div>
-            <?php          
+</div>
+                
+                <?php          
 
-            $sql = "SELECT * FROM objective where projectID=$projectId";
-            $result = $conn->query($sql);
-            if ($result->num_rows > 0) {
-                $count=1;
-                echo "<table>
-                  <thead><tr><th>No</th>
-                <th>objective</th>
-                <th>Remove</th></tr></thead>";
-                while ($row = $result->fetch_assoc()) {
+$sql = "SELECT * FROM objective where projectID=$projectId";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+   echo "<table><tr><th>objective</th>
+   <th>Remove</th></tr>";
+   
+   while ($row = $result->fetch_assoc()) {
 
-                   echo "<tr>
-                    <td>".$row['objectiveID']."</td>
-                    <td>" .$row['objective']. "</td>
-                    <td> <button type='button' class='btn-danger a-btn-slide-text objective' 
-                    data-deleteid=".$row['objectiveID']." data-projectid=".$row['projectID']."><span class='glyphicon glyphicon-trash' 
-                    aria-hidden='true'></span>
-                    </button></td>
-                    </tr>";
-                  $count++;                 
-                }
-                 echo "</table><br>";
-            }?>
+       echo "<tr><td><input type='text' class='form-control' id='objective' name='objective[]' value=".$row['objective']."></td>
+       <td><button type='button' 
+       <span class='btn-danger glyphicon glyphicon-remove removeob' aria-hidden='true'></span></button>
+       </td></tr>";
+                   
+    }
+    echo "</table><br>";
+}?>
+          
 
             <div class="form-group row">
                 
@@ -426,28 +422,22 @@ while ($row = $result->fetch_assoc())
 
             $sql = "SELECT * FROM list_committee where projectID=$projectId";
             $result = $conn->query($sql);
-            if ($result->num_rows > 0) {
-                $count=1;
-                echo "<table>
-                  <thead><tr><th>No</th>
-                <th>Name</th>
-                <th>Position</th>
-                <th>Remove</th></tr></thead>";
-                while ($row = $result->fetch_assoc()) {
+            $result = $conn->query($sql);
+if ($result->num_rows > 0) {
+   echo "<table><tr><th>Name</th>
+   <th>Position</th>
+   <th>Remove</th></tr>";
+   
+   while ($row = $result->fetch_assoc()) {
 
-                   echo "<tr>
-                    <td>".$row['listID']."</td>
-                    <td>" .$row['name']. "</td>
-                    <td>" .$row['position']. "</td>
-                    <td> <button type='button' class='btn-danger a-btn-slide-text committee' 
-                    data-deleteid=".$row['listID']." data-projectid=".$row['projectID']."><span class='glyphicon glyphicon-trash' 
-                    aria-hidden='true'></span>
-                    </button></td>
-                    </tr>";
-                  $count++;                 
-                }
-                 echo "</table><br>";
-            }?>
+       echo "<tr><td><input class='form-control' id='cccname' name='ccname[]' value=".$row['name']."></td>
+            <td><input class='form-control' id='ppmember' name='ppmember[]' value=".$row['position']."></td>  
+            <td class='table-remove'><button type'button' <span class='btn-danger glyphicon glyphicon-remove removecommittee' aria-hidden='true'></span></button></td></tr>";
+                   
+    }
+    echo "</table><br>";
+}?>
+            
 
 
  
@@ -508,7 +498,6 @@ while ($row = $result->fetch_assoc())
               </tbody>
             </table>
           </div>
-
           <div id="tittle">Activity Agenda</div>
 
           <?php          
@@ -525,14 +514,11 @@ while ($row = $result->fetch_assoc())
                 while ($row = $result->fetch_assoc()) {
 
                    echo "<tr>
-                    <td>".$row['dateevent']."</td>
-                    <td>" .$row['timeevent']. "</td>
-                    <td>" .$row['activity']. "</td>
-                    <td> <button type='button' class='btn-danger a-btn-slide-text agenda' 
-                    data-deleteid=".$row['agendaID']." data-projectid=".$row['projectID']."><span class='glyphicon glyphicon-trash' 
-                    aria-hidden='true'></span>
-                    </button></td>
-                    </tr>";                
+                   <td><input class='form-control' id='aadate' name='aadate[]' value=".$row['dateevent']."></td>
+                   <td><input class='form-control' id='aatime' name='aatime[]' value=".$row['timeevent']."></td>
+                   <td><input class='form-control' id='aactivity' name='aactivity[]' value=".$row['activity']."></td>
+                   <td class='table-remove'><button type='button' <span class='btn-danger glyphicon glyphicon-remove removeagenda' aria-hidden='true'></span></button></td>
+                   </tr>";                
                 }
                  echo "</table><br>";
             }?>
@@ -589,14 +575,9 @@ while ($row = $result->fetch_assoc())
                 <th>Remove</th></tr></thead>";
                 while ($row = $result->fetch_assoc()) {
 
-                   echo "<tr>
-                    <td>".$row['item']."</td>
-                    <td>" .$row['amount']. "</td>
-                    <td> <button type='button' class='btn-danger a-btn-slide-text income' 
-                    data-deleteid=".$row['incomeID']." data-projectid=".$row['projectID']."><span class='glyphicon glyphicon-trash' 
-                    aria-hidden='true'></span>
-                    </button></td>
-                    </tr>";                
+                   echo "<tr><td><input class='form-control' id='iitem1' name='iitem1[]' value=".$row['item']."></td>
+                         <td><input class='form-control' id='iincome' name='iincome[]' value=".$row['amount']."></td>
+                         <td><button type='button' <span class='btn-danger glyphicon glyphicon-remove removeincome' aria-hidden='true'></span></button></td></tr>";                
                 }
                  echo "</table><br>";
             }?>
@@ -646,14 +627,9 @@ while ($row = $result->fetch_assoc())
                 <th>Remove</th></tr></thead>";
                 while ($row = $result->fetch_assoc()) {
 
-                   echo "<tr>
-                    <td>".$row['item']."</td>
-                    <td>" .$row['amount']. "</td>
-                    <td> <button type='button' class='btn-danger a-btn-slide-text expenditure' 
-                    data-deleteid=".$row['incomeID']." data-projectid=".$row['projectID']."><span class='glyphicon glyphicon-trash' 
-                    aria-hidden='true'></span>
-                    </button></td>
-                    </tr>";                
+                   echo "<tr><td><input class='form-control' id='iitem2' name='iitem2[]' value=".$row['item']."></td>
+                   <td><input class='form-control' id='eexpenditure' name='eexpenditure[]' value=".$row['amount']."></td>
+                   <td><button type='button' <span class='btn-danger glyphicon glyphicon-remove removeexpenditure' aria-hidden='true'></span></button></td></tr>";                
                 }
                  echo "</table><br>";
             }?>
