@@ -1,6 +1,7 @@
 //Addmorebutton for objective
 
 $(document).ready(function () {
+    
     var maxField = 10; //Input fields increment limitation
     var addButton = $('.addService'); //Add button selector
     var wrapper = $('.Field1'); //Input field wrapper
@@ -24,7 +25,7 @@ $(document).ready(function () {
     });
 });
 
-// /add data into table committe old
+///add data into table committe
 $(function () {
     var data = document.getElementById("add");
     data.addEventListener("click", Details);
@@ -33,11 +34,13 @@ $(function () {
 
     function Details() {
 
-        var nmembers = document.getElementById("nmembers").value;
+        var rid = document.getElementById("rid").value;
+        // var nmembers = document.getElementById("nmembers").value;
         var pmember = document.getElementById("pmember").value;
 
-        var _tr = `<tr><td>${nmembers}</td>   <td>${pmember}</td>   <td class="table-remove"><button type="button" <span class="btn-danger glyphicon glyphicon-remove delete" aria-hidden="true"></span></button></td></tr>`;
+        var _tr = `<tr><td><input class="form-control" id="cccname" name="ccname[]" value="${rid}"></td>     <td><input class="form-control" id="ppmember" name="ppmember[]" value="${pmember}"></td>    <td class="table-remove"><button type="button" <span class="btn-danger glyphicon glyphicon-remove delete" aria-hidden="true"></span></button></td></tr>`;
         $('#tab1').append(_tr);
+     
     };
 
     $(document).on('click', '.delete', function () {
@@ -48,9 +51,6 @@ $(function () {
     });
 
 });
-
-
-
 
 //add for activity agenda
 $(function () {
@@ -64,7 +64,7 @@ $(function () {
         var atime = document.getElementById("atime").value;
         var activity = document.getElementById("activity").value;
 
-        var _tr = `<tr><td>${adate}</td>   <td>${atime}</td>   <td>${activity}</td>    <td class="table-remove"><button type="button" <span class="btn-danger glyphicon glyphicon-remove delete2" aria-hidden="true"></span></button></td></tr>`;
+        var _tr = `<tr><td><input class="form-control" id="aadate" name="aadate[]" value="${adate}"></td>     <td><input class="form-control" id="aatime" name="aatime[]" value="${atime}"></td>   <td><input class="form-control" id="aactivity" name="aactivity[]" value="${activity}"></td>    <td class="table-remove"><button type="button" <span class="btn-danger glyphicon glyphicon-remove delete2" aria-hidden="true"></span></button></td></tr>`;
         $('#tab3').append(_tr);
     };
 
@@ -87,7 +87,7 @@ $(function () {
         var item1 = document.getElementById("item1").value;
         var income = document.getElementById("income").value;
 
-        var _tr = `<tr><td>${item1}</td>   <td>${income}</td>     <td><button type="button" <span class="btn-danger glyphicon glyphicon-remove delete3" aria-hidden="true"></span></button></td></tr>`;
+        var _tr = `<tr><td><input class="form-control" id="iitem1" name="iitem1[]" value="${item1}"></td>   <td><input class="form-control" id="iincome" name="iincome[]" value="${income}"></td>     <td><button type="button" <span class="btn-danger glyphicon glyphicon-remove delete3" aria-hidden="true"></span></button></td></tr>`;
         $('#tab4').append(_tr);
     };
 
@@ -109,7 +109,7 @@ $(function () {
         var item2 = document.getElementById("item2").value;
         var expenditure = document.getElementById("expenditure").value;
 
-        var _tr = `<tr><td>${item2}</td>   <td>${expenditure}</td>     <td><button type="button" <span class="btn-danger glyphicon glyphicon-remove delete4" aria-hidden="true"></span></button></td></tr>`;
+        var _tr = `<tr><td><input class="form-control" id="iitem2" name="iitem2[]" value="${item2}"></td>   <td><input class="form-control" id="eexpenditure" name="eexpenditure[]" value="${expenditure}"></td>     <td><button type="button" <span class="btn-danger glyphicon glyphicon-remove delete4" aria-hidden="true"></span></button></td></tr>`;
         $('#tab5').append(_tr);
     };
 
@@ -119,3 +119,9 @@ $(function () {
     });
 
 });
+
+
+//data into modal
+
+
+

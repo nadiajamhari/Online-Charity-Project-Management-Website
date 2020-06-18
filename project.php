@@ -10,9 +10,11 @@
     <!-- Bootstrap CSS -->
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link href="layout.css?v=<?php echo time(); ?>" rel="stylesheet" type="text/css" />
-    <link href="project.css?v=<?php echo time(); ?>" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="layout.css">
+    <link rel="stylesheet" type="text/css" href="project.css">
+    <title>Project of Charity</title>
 </head>
 
 <body>
@@ -84,27 +86,26 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!--retrieve data from data base-->
-
-                                <?php
+                            <?php
                                 $sql = "SELECT * FROM project";
                                 $result = $conn->query($sql);
                                 if ($result->num_rows > 0) {
-                                    while ($row = $result->fetch_assoc()) {?>
-                                        <tr><td><?php echo $row["projectName"];?></td>
-                                        <td><?php echo $row["participantLevel"];?></td>
-                                        <td><?php echo $row["startDate"]?></td>
-                                        <td><?php echo $row["endDate"]?></td>
-                                        <td><li><a href="MeetingList.html">View meeting</a></li>
-                                            <li><a href="assignProject.html">View volunteer</a></li></td>
-                                        <td>
-                                             <button class="btn-default a-btn-slide-text"><a href="viewproject.php?id=<?php $row["projectID"];?>"></a><span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                                       </button></a>&nbsp;
-                                        <button type="button" class="btn-danger a-btn-slide-text" data-toggle="modal"
-                                            data-target="#ModalCenter">
-                                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                                        </button> </td></tr>
-                                    <?php
+                                    while ($row = $result->fetch_assoc()) {
+                                        $id = $row['projectID'];
+                                        echo "<tr><td>". $row["projectName"]." </td>";
+                                        echo "<td>". $row["participantLevel"]."</td>";
+                                        echo "<td>". $row["startDate"]."</td>";
+                                        echo "<td>". $row["endDate"]." </td>";
+                                        echo "<td><li><a href='MeetingList.html'>View meeting</a></li>
+                                            <li><a href='assignProject.html'>View volunteer</a></li></td>";
+                                        echo "<td><button class='btn-default a-btn-slide-text'><a href='viewProject.php?id=$id'><span class='glyphicon glyphicon-eye-open'
+                                        aria-hidden='true'></span></a>
+                                        </button>&nbsp;
+                                        <button type='button' class='btn-danger a-btn-slide-text' 
+                                        data-deleteid=".$id."><span class='glyphicon glyphicon-trash' 
+                                        aria-hidden='true'></span>
+                                        </button> </td></tr>";
+                        
                                     }
                                 }
                                
@@ -127,51 +128,65 @@
 
             <!-- Modal HTML -->
 
-            <div class="modal fade" id="ModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  
+            <div class="modal fade in" id="modalDelete" tabindex="-1" role="dialog"
+                aria-labelledby="ModalCenterTitle" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLongTitle">Delete</h5>
+                            <h5 class="modal-title" id="ModalLongTitle">Delete</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
+                        <form action="delete.php" method="POST">
                         <div class="modal-body">
+                            
                             Are you sure you want to delete this project? This process cannot be undone.
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            <button type="button" class="btn btn-danger">Delete</button>
+                            <p id="iddelete"></p>
+                            <button type="submit" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <button type="submit" name="deleteproject" class="btn btn-danger">Delete</button>
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>
 
         </main>
         <footer>
-           
+            <div class="container text-center">
                 MyCharity<br>
 
                 © 2020 FCSIT. All Rights Reserved
-           
+            </div>
         </footer>
     </div>
 
 
-<?php
- $conn->close();
 
-?>
 
     <!-- JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
     <script type="text/javascript" src="layout.js"></script>
+    <script type="text/javascript" src="project.js"></script>
 </body>
 
 </html>
+<?php
+ $conn->close();
+
+?>

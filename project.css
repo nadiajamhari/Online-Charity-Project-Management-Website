@@ -38,15 +38,13 @@ th{
 }
 #action{
     width: 90px;
+    align-items: center;
 }
 
 #part-meet{
     width:150px;
 }
-
-        #onhover{
-                display:none;
-            }
-            #edit:hover ~ #onhoverfb{
-                display: block;
-            }
+.fixed-top{
+    position: absolute;
+    top:0;
+}
