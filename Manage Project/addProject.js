@@ -2,26 +2,21 @@
 
 $(document).ready(function () {
     
-    var maxField = 10; //Input fields increment limitation
+  
     var addButton = $('.addService'); //Add button selector
-    var wrapper = $('.Field1'); //Input field wrapper
+    
     var fieldHTML = '<div><input type="text" class="form-control-sm" id="objective" name="objective[]" placeholder="Objective"><button type="button" <span class="btn-danger glyphicon glyphicon-remove remove" aria-hidden="true"></span></button></div>'; //New input field html 
-    var x = 1; //Initial field counter is 1
-
-    //Once add button is clicked
+      //Once add button is clicked
     $(addButton).click(function () {
-        //Check maximum number of input fields
-        if (x < maxField) {
-            x++; //Increment field counter
-            $(wrapper).append(fieldHTML); //Add field html
-        }
+        
+            $('.Field1').append(fieldHTML); //Add field html
+        
     });
 
     //Once remove button is clicked
     $(wrapper).on('click', '.remove', function (e) {
         e.preventDefault();
         $(this).parent('div').remove(); //Remove field html
-        x--; //Decrement field counter
     });
 });
 
@@ -64,7 +59,7 @@ $(function () {
         var atime = document.getElementById("atime").value;
         var activity = document.getElementById("activity").value;
 
-        var _tr = `<tr><td><input class="form-control" id="aadate" name="aadate[]" value="${adate}"></td>     <td><input class="form-control" id="aatime" name="aatime[]" value="${atime}"></td>   <td><input class="form-control" id="aactivity" name="aactivity[]" value="${activity}"></td>    <td class="table-remove"><button type="button" <span class="btn-danger glyphicon glyphicon-remove delete2" aria-hidden="true"></span></button></td></tr>`;
+        var _tr = `<tr><td><input class="form-control" id="aadate" name="aadate[]" value="${adate}"></td>     <td><input type="time" class="form-control" id="aatime" name="aatime[]" value="${atime}"></td>   <td><input class="form-control" id="aactivity" name="aactivity[]" value="${activity}"></td>    <td class="table-remove"><button type="button" <span class="btn-danger glyphicon glyphicon-remove delete2" aria-hidden="true"></span></button></td></tr>`;
         $('#tab3').append(_tr);
     };
 
