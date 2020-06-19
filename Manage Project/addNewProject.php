@@ -450,7 +450,7 @@
               </div>
               <div class="form-group col-md-2">
                 <label for="atime">Time</label>
-                <input type="text" name="Agenda Time" class="form-control form-control-sm" id="atime"
+                <input type="time" name="Agenda Time" class="form-control form-control-sm" id="atime"
                   placeholder="Time">
               </div>
               <div class="form-group col-md-6">
@@ -499,11 +499,7 @@
               </tr>
 
             </tbody>
-            <tfoot>
-              <td style="text-align: right;">Total</td>
-              <td></td>
-              <td></td>
-                          </tfoot>
+           
 
           </table>
 
@@ -527,12 +523,6 @@
               </tr>
 
             </tbody>
-            <tfoot>
-              <td style="text-align: right;">Total</td>
-              <td></td>
-              <td></td>
-            </tfoot>
-
           </table>
 
 
