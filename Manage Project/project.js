@@ -6,7 +6,7 @@ $(document).ready(function(){
         console.log(rec);
          
         $('#modalDelete').modal();
-        input2= `<input type='hidden' name ='iddelete' value=${rec}>`;
+        input2= "<a href='delete.php?id="+rec+"'><button type='submit' name='deleteproject' class='btn btn-danger'>Delete</button></a>";
         document.getElementById('iddelete').innerHTML=input2;
     });
 });

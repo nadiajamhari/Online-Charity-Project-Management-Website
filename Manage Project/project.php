@@ -87,7 +87,7 @@
                             </thead>
                             <tbody>
                             <?php
-                                $sql = "SELECT * FROM project";
+                                $sql = "SELECT * FROM project Order by startDate DESC";
                                 $result = $conn->query($sql);
                                 if ($result->num_rows > 0) {
                                     while ($row = $result->fetch_assoc()) {
@@ -139,17 +139,16 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <form action="delete.php" method="POST">
+                        
                         <div class="modal-body">
                             
                             Are you sure you want to delete this project? This process cannot be undone.
                         </div>
                         <div class="modal-footer">
-                            <p id="iddelete"></p>
                             <button type="submit" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            <button type="submit" name="deleteproject" class="btn btn-danger">Delete</button>
+                            <p id="iddelete"></p>
                         </div>
-                        </form>
+                    
                     </div>
                 </div>
             </div>

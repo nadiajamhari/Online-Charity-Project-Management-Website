@@ -191,7 +191,10 @@ include_once("pconfig.php");
                                                 while ($row = $result->fetch_assoc()) {
                                                     echo "<tr><td>" . $row['item'] . "</td><td>" . $row['amount'] . "</td><tr>";
                                                 }
-                                                echo "</table></td>";
+                                                echo "</td>
+                                                <tr>
+                                                </tr></table>
+                                                ";
                                             } else {
                                                 echo "Not Available </td>";
                                             } ?>

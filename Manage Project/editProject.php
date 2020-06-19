@@ -401,13 +401,11 @@ if ($result->num_rows > 0) {
                 
                   
                 
-              <label for="objective" class="col-sm-2 col-form-label">Objective</label>
-              <div class="col-sm-10 Field1">
-                <div class="pull-right">
-                  <button type="button" class="btn-info addService"><span class="glyphicon glyphicon-plus-sign"
-                      aria-hidden="true"></span></button></div>
-                <input type="text" class="form-control form-control-sm" id="objective" name="objective[]"
-                  placeholder="Objective">
+              <label for="objective" class="col-sm-4 col-form-label">Add More Objective</label>
+              <div class="col-sm-8 Field1">
+                
+                  <button type="button" class="btn btn-info addService"><span class="glyphicon glyphicon-plus-sign"
+                      aria-hidden="true"></span>Add More</button>
 
               </div>
             </div>
@@ -604,12 +602,6 @@ if ($result->num_rows > 0) {
               </tr>
 
             </tbody>
-            <tfoot>
-              <td style="text-align: right;">Total</td>
-              <td></td>
-              <td></td>
-                          </tfoot>
-
           </table>
 
 
@@ -651,11 +643,7 @@ if ($result->num_rows > 0) {
               </tr>
 
             </tbody>
-            <tfoot>
-              <td style="text-align: right;">Total</td>
-              <td></td>
-              <td></td>
-            </tfoot>
+
 
           </table>
 
