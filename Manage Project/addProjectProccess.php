@@ -1,6 +1,7 @@
 <?php
 include_once("pconfig.php");
 
+
 $pname = $sdate = $edate  = $plevel = $venue = $country = $last_id =$objective=$ccname =$ppmember= $aadate = $aatime = $aactivity =$iitem1=$iitem2=$iincome=$eexpenditure="";
 //check submit or not
 // if(isset($_POST["submit"])){
@@ -30,17 +31,17 @@ else {
 //for objective
 if(isset($_POST["objective"])){
 
-foreach ($_POST["objective"] as $objective){
+ foreach ($_POST["objective"] as $objective){
     
     $o[]=$objective;
 
 }
 
-for ($i=0 ; $i<sizeof($o);$i++){
-    $sql1 = "INSERT INTO objective (projectID, objective)
-VALUES ('$last_id','$o[$i]')";
+ for ($i=0 ; $i<sizeof($o);$i++){
+$sql1 = "INSERT INTO objective (projectID, objective)
+ VALUES ('$last_id','$o[$i]')";
 
-if($conn->query($sql1)===TRUE){
+ if($conn->query($sql1)===TRUE){
     // echo "New Record created successfully $count";
 }
 else {
@@ -112,6 +113,8 @@ if(isset($_POST["ccname"]) && isset($_POST["ppmember"])){
 
             if(isset($_POST["iitem1"]) && isset($_POST["iincome"])){
 
+                $total=0;
+
                 foreach ($_POST["iitem1"] as $iitem1){
                     
                     $e[]=$iitem1;
@@ -120,25 +123,39 @@ if(isset($_POST["ccname"]) && isset($_POST["ppmember"])){
                 foreach ($_POST["iincome"] as $iincome){
                     
                     $n[]=$iincome;
+                    $total=$total+$iincome;
+
                 
                 }
                 
                 for ($i=0 ; $i<sizeof($e);$i++){
-                    $sql1 = "INSERT INTO income (projectID, item,amount)
+                    $sql = "INSERT INTO income (projectID, item,amount)
                 VALUES ('$last_id','$e[$i]','$n[$i]')";
                 
+                if($conn->query($sql)===TRUE){
+                }
+                else {
+                    echo "Error : " . $sql . "<br>" .$conn->error;
+                }
+                }
+
+                //insert total to total income
+                
+                $sql1 ="INSERT INTO total_income(projectID,amount) VALUES ('$last_id','$total')";
                 if($conn->query($sql1)===TRUE){
-                    // echo "New Record created successfully $count";
+                    echo "total amount dapat masuk";
                 }
                 else {
                     echo "Error : " . $sql1 . "<br>" .$conn->error;
                 }
-                }
+                
+
             }
 //----------------------------------------------------------------------
 //expenditure
 
                 if(isset($_POST["iitem2"]) && isset($_POST["eexpenditure"])){
+                    $total=0;
 
                     foreach ($_POST["iitem2"] as $iitem2){
                         
@@ -148,43 +165,54 @@ if(isset($_POST["ccname"]) && isset($_POST["ppmember"])){
                     foreach ($_POST["eexpenditure"] as $eexpenditure){
                         
                         $h[]=$eexpenditure;
+                        $total = $total + $eexpenditure;
                     
                     }
                     
                     for ($i=0 ; $i<sizeof($y);$i++){
-                        $sql1 = "INSERT INTO expenditure (projectID, item,amount)
+                        $sql = "INSERT INTO expenditure (projectID, item,amount)
                     VALUES ('$last_id','$y[$i]','$h[$i]')";
                     
-                    if($conn->query($sql1)===TRUE){
+                    if($conn->query($sql)===TRUE){
                         // echo "New Record created successfully $count";
                     }
                     else {
                         echo "Error : " . $sql1 . "<br>" .$conn->error;
                     }
                     }
+                    $sql1 ="INSERT INTO total_expenditure(projectID,amount) VALUES ('$last_id','$total')";
+                if($conn->query($sql1)===TRUE){
+                    echo "total amount dapat masuk1";
+                }
+                else {
+                    echo "Error : " . $sql1 . "<br>" .$conn->error;
+                }
+                
+
+
     }
     //-----------------------------------------------------
 }
 $conn->close();
-echo "<html><script> window.location.href=\"project.php\";</script></html>";
+// echo "<html><script> window.location.href=\"project.php\";</script></html>";
 }
 
 if(isset($_POST['updateProject'])){
 
-$projectID = $_POST['projectID'];
-$pname = $_POST["pname"]; 
-$sdate = $_POST["startdate"]; 
-$edate = $_POST["enddate"]; 
-$plevel = $_POST["participantlevel"]; 
-$venue = $_POST["venue"]; 
-$country =$_POST["country"];
+ $projectID = $_POST['projectID'];
+ $pname = $_POST["pname"]; 
+ $sdate = $_POST["startdate"]; 
+ $edate = $_POST["enddate"]; 
+ $plevel = $_POST["participantlevel"]; 
+ $venue = $_POST["venue"]; 
+ $country =$_POST["country"];
 
 //  insert part 1
 $sql = "UPDATE project SET projectName='$pname',startDate='$sdate',endDate='$edate', 
-participantLevel='$plevel',venue='$venue',country='$country' WHERE projectID=$projectID";
+ participantLevel='$plevel',venue='$venue',country='$country' WHERE projectID=$projectID";
 
  if (mysqli_query($conn, $sql)) {
-  echo "Record updated successfully";
+//   echo "Record updated successfully";
  } else {
    echo "Error updating record: " . mysqli_error($conn);
  }
@@ -194,7 +222,7 @@ participantLevel='$plevel',venue='$venue',country='$country' WHERE projectID=$pr
 $sql = "DELETE FROM objective WHERE projectID=$projectID";
 
     if ($conn->query($sql) === TRUE) {
-      echo "Record deleted successfully1";
+    //   echo "Record deleted successfully1";
     } else {
       echo "Error deleting record: " . $conn->error;
     }
@@ -225,7 +253,7 @@ $sql = "DELETE FROM objective WHERE projectID=$projectID";
 $sql = "DELETE FROM list_committee WHERE projectID=$projectID";
 
     if ($conn->query($sql) === TRUE) {
-      echo "Record deleted successfully2";
+    //   echo "Record deleted successfully2";
     } else {
       echo "Error deleting record: " . $conn->error;
     }
@@ -260,7 +288,7 @@ $sql = "DELETE FROM list_committee WHERE projectID=$projectID";
  $sql = "DELETE FROM agenda WHERE projectID=$projectID";
 
     if ($conn->query($sql) === TRUE) {
-      echo "Record deleted successfully3";
+    //   echo "Record deleted successfully3";
     } else {
       echo "Error deleting record: " . $conn->error;
     }
@@ -298,13 +326,16 @@ $sql = "DELETE FROM list_committee WHERE projectID=$projectID";
         //------------------------------------------------//
         //income
  $sql = "DELETE FROM income WHERE projectID=$projectID";
+ $sql2 = "DELETE FROM total_income where projectID=$projectID";
 
-        if ($conn->query($sql) === TRUE) {
-          echo "Record deleted successfully4";
+        if (($conn->query($sql) && $conn->query($sql2)) === TRUE) {
+        //   echo "Record deleted successfully4";
         } else {
           echo "Error deleting record: " . $conn->error;
         }
             if(isset($_POST["iitem1"]) && isset($_POST["iincome"])){
+
+                $total=0;
           
 
                 foreach ($_POST["iitem1"] as $iitem1){
@@ -315,32 +346,45 @@ $sql = "DELETE FROM list_committee WHERE projectID=$projectID";
                 foreach ($_POST["iincome"] as $iincome){
                     
                     $n[]=$iincome;
+                    $total=$total+$iincome;
                 
                 }
                 
                 for ($i=0 ; $i<sizeof($e);$i++){
-                    $sql1 = "INSERT INTO income (projectID, item,amount)
+                    $sql = "INSERT INTO income (projectID, item,amount)
                 VALUES ('$projectID','$e[$i]','$n[$i]')";
                 
-                if($conn->query($sql1)===TRUE){
+                if($conn->query($sql)===TRUE){
                     // echo "New Record created successfully $count";
+                }
+                else {
+                    echo "Error : " . $sql . "<br>" .$conn->error;
+                }
+                }
+
+                $sql1 ="INSERT INTO total_income(projectID,amount) VALUES ('$projectID','$total')";
+                if($conn->query($sql1)===TRUE){
+                    // echo "total amount dapat masuk1";
                 }
                 else {
                     echo "Error : " . $sql1 . "<br>" .$conn->error;
                 }
-                }
+                
             }
 //----------------------------------------------------------------------
 // expenditure
 $sql = "DELETE FROM expenditure WHERE projectID=$projectID";
+$sql2 = "DELETE FROM total_expenditure where projectID=$projectID";
 
-    if ($conn->query($sql) === TRUE) {
-        echo "Record deleted successfully5";
+    if (($conn->query($sql) && $conn->query($sql2)) === TRUE) {
+        // echo "Record deleted successfully5";
       } else {
         echo "Error deleting record: " . $conn->error;
       }
 
                 if(isset($_POST["iitem2"]) && isset($_POST["eexpenditure"])){
+
+                    $total=0;
 
                     
 
@@ -352,20 +396,29 @@ $sql = "DELETE FROM expenditure WHERE projectID=$projectID";
                     foreach ($_POST["eexpenditure"] as $eexpenditure){
                         
                         $h[]=$eexpenditure;
+                        $total=$total+$eexpenditure;
                     
                     }
                     
                     for ($i=0 ; $i<sizeof($y);$i++){
-                        $sql1 = "INSERT INTO expenditure (projectID, item,amount)
+                        $sql = "INSERT INTO expenditure (projectID, item,amount)
                     VALUES ('$projectID','$y[$i]','$h[$i]')";
                     
-                    if($conn->query($sql1)===TRUE){
+                    if($conn->query($sql)===TRUE){
                         // echo "New Record created successfully $count";
+                    }
+                    else {
+                        echo "Error : " . $sql . "<br>" .$conn->error;
+                    }
+                    }
+                    $sql1 ="INSERT INTO total_expenditure(projectID,amount) VALUES ('$projectID','$total')";
+                    if($conn->query($sql1)===TRUE){
+                        // echo "total amount dapat masuk1";
                     }
                     else {
                         echo "Error : " . $sql1 . "<br>" .$conn->error;
                     }
-                    }
+                    
     }
     //-----------------------------------------------------
     mysqli_close($conn);
