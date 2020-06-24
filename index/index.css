@@ -4,21 +4,33 @@ html{
     height: 100%;
 }
 
+/*styling for body/contents of page*/
 body{
     background-color:#ffffff;
     text-align: justify;
-    color:#899191;
+    color:#000000;
     min-height: 100vh;
 }
 
 header {
-    background: url(header.jpg);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(header.jpg);
+    /* background: url(header.jpg); */
     background-size: cover;
     background-repeat: no-repeat;
     background-position: right;
     margin:auto;
     height:740px;
   }
+/*css for footer*/
+footer {
+
+    padding-top: 1rem;
+    padding-bottom:1rem;
+    color: black;
+    background-color: #F2BC94;
+}    
+
+/*styling for words*/
 h1{
     font-family: 'Times New Roman', Times, serif;
     font-size: 61px;
@@ -28,25 +40,27 @@ h1{
     color: whitesmoke;
     padding-top: 250px;
     padding-bottom: 270px;
+    text-shadow: black;
+    
 }
 /*css for the h1 paragraph*/
 h1 p{
     color:white;
+    
+}
+
+#forms{
+    color: black;
+}
+
+#shadow{
+    text-shadow: 2px 2px 5px black;
 }
 h4{
     padding-top: 50px;
     text-align:center;
     color: black;
 }
-/*css for footer*/
-footer {
-
-    padding-top: 1rem;
-    padding-bottom:1rem;
-   
-    color: black;
-    background-color: #F2BC94;
-}    
 
 .h1, .h3, .h4, .h5, .h6, h1, h3, h5, h6 {
     margin-bottom:.5rem;
@@ -54,17 +68,24 @@ footer {
     line-height: 1.2;
     text-align: center;
 }
+
+/*Styling for navigation*/
 .navbar-nav .nav-link {
     margin-right: 10px;
     margin-left: 10px;
+  
+
 }
 .bg-dark {
     transition:500ms ease;
-    background-color:transparent!important;
+    background-color: rgba(242, 188, 148, 0.2)!important;
+    /* background-color:#F2BC94!important; */
+    /* background-color:transparent!important; */
 }
 
 .bg-dark.scrolled{
     background-color:#F2BC94!important;
+
 }
 .p1{
     position: relative;
@@ -76,14 +97,25 @@ a:hover{
 }
 a{
     text-decoration: none;
-    color:white;
+    /* color:white; */
 }
 
+#aaa{
+    color: blueviolet;
+}
+#aaa:hover{
+    color: rgb(0, 0, 0);
+}
+
+#small{
+    text-size-adjust: smaller;
+}
 
 p{
     text-align: center;
     font-size: large;
     padding:30px 5px 10px 5px;
+    
 }
 
 
@@ -106,11 +138,13 @@ padding-bottom:100px;
 .table1 table tr:nth-child(even) {
     background-color: rgb(209, 202, 202);
 }
+
 /*css for register border at navbar*/
 #register{
     border: 1px solid black;
     border-radius:30px;
 }
+
 /*toggle class when scrolled*/
 #register.scrolled{
     background-color: chocolate;
@@ -131,16 +165,16 @@ padding-bottom:100px;
     padding:30px 10px 50px 10px;
 }
 .contact{
-    color: black;
+    color: rgb(255, 255, 255);
     background-color: #F2BC94;
     padding:50px 10px 30px 10px;
     font-size: 10px;
 }
 
 .contact table{
-width: 100%;
-margin: auto;
-font-size: 14px;
+    width: 100%;
+    margin: auto;
+    font-size: 14px;
 }
 
 .contact table th{
@@ -157,8 +191,196 @@ font-size: 14px;
     text-align: center;
 }
 
-.fixed-top.position{
-    position: absolute;
-    top:0;
+
+
+/*start utk part login signup*/
+
+#h3h3{
+    font-size: medium;
+    border-bottom: solid rosybrown 1px;
+    
 }
 
+input[type=text], input[type=password] {
+    background-color:#ffffff;
+    text-align: justify;
+    color:#000000;
+    height: 100%;
+    position: relative;
+    width: 100%; 
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+
+#profile-container {
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
+}
+
+
+#rememberme{
+    position: left;
+}
+
+/* Set a style for all buttons */
+button {
+    background-color: transparent;
+    color: rgb(43, 28, 1);
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 1px;
+
+    }
+#tologin{
+    width: 500px;
+    height: 50px;
+    background-color: transparent;
+    size: medium;
+    position: fixed, right;
+}
+
+#buttonhere{
+   
+    background-color: salmon;
+    -webkit-linear-gradient : (left, #a445b2, #d41872, #fa4299);
+    size: medium;
+    color: white;
+    position: fixed, left;
+    width: 120px;
+    height: 50px; 
+
+    }
+    
+#button-nav{
+    background-color: transparent;
+    position: center;
+    color: rgb(43, 28, 1);
+    margin-right: 10px;
+    margin-left: 10px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    color: black;
+    }
+
+/* Extra styles for the cancel button */
+.cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    size: medium;
+    color: white;
+    background-color: #f44336
+    }
+
+/*Styling for the check box in remember me*/
+/* :checked{
+    width: 10%;
+
+    } */
+
+/* Center the image and position the close button */
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
+    position: relative;
+    }
+
+img.avatar {
+    width: 30%;
+    border-radius: 40%;
+    }
+
+.container {
+    padding-left: 70px;
+    padding-right: 70px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    }
+
+span.psw {
+    float: right;
+    padding-top: 16px;
+    }
+
+
+input {
+    /* width: 100%;  */
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    }
+
+
+/* The message box is shown when the user clicks on the password field */
+#message {
+    display:none;
+    background: #f1f1f1;
+    padding: 60px;
+    width: 60%;
+    height: 60%;
+    color: #000;
+    background-position: center;
+    position: static;
+    padding: 20px;
+    margin-top: 10px;
+    }
+
+#message p {
+    padding: 10px 35px;
+    font-size: 18px;
+    }
+
+/* Add a green text color and a checkmark when the requirements are right */
+.valid {
+    color: green;
+    }
+
+.valid:before {
+    position: relative;
+    left: -35px;
+    content: "✔";
+    }
+
+/* Add a red text color and an "x" when the requirements are wrong */
+.invalid {
+    color: red;
+    }
+
+.invalid:before {
+    position: relative;
+    left: -35px;
+    content: "✖";
+    } 
+
+/*Style for the notvisible pic*/
+img.icon{
+    width: 4%;
+    height: 4%;
+    size: 4px;
+    position: right;
+    border-radius: 3%;
+    } 
+
+    input.hidden {
+        position: absolute;
+        left: -9999px;
+    }
+    
