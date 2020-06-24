@@ -1,20 +1,9 @@
-<?php
-include_once("pconfig.php");
-$projectId = $_GET['id'];
-
-$sql="SELECT * FROM project Where projectID=$projectId";
-$result =$conn->query($sql);
-
-while ($row = $result->fetch_assoc())
-{
-	$projectName = $row["projectName"];
-	$startDate = $row["startDate"];
-	$endDate = $row["endDate"];
-	$participantLevel = $row["participantLevel"];
-	$venue = $row["venue"];
-	$country = $row["country"];
-}
+<?php include_once("pconfig.php");
+session_start();
+$userID=$_SESSION['userID'];
+$_SESSION['login'] = true;
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -31,7 +20,8 @@ while ($row = $result->fetch_assoc())
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" href="layout.css">
   <link rel="stylesheet" type="text/css" href="addProject.css">
-  <title>Add Project</title>
+  <link rel="icon" href="Favicon.png">
+  <title>Add New Project</title>
 </head>
 
 <body>
@@ -40,29 +30,26 @@ while ($row = $result->fetch_assoc())
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 
     <div class="msidenav">
-      <li id="nav-item">
-        <a href="profile.html"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-            <span>MY PROFILE</span></a>
-    </li>
-    <li id="nav-item">
-        <a href="project.php"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-            <span>PROJECTS</span></a>
-    </li>
-    <li id="nav-item">
-        <a href="volunteer.html"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-            <span>VOLUNTEERS</span></a>
-    </li>
+            <li id="nav-item">
+                <a href="../Profile/profile.php"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                    <span>MY PROFILE</span></a>
+            </li>
+            <li id="nav-item">
+                <a href="../ManageProject/project.php"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                    <span>PROJECTS</span></a>
+            </li>
+            <li id="nav-item">
+                <a href="../Volunteer/viewvolunteer.php"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+                    <span>VOLUNTEERS</span></a>
+            </li>
+            <li id="nav-item">
+                <a href="../Committee/committee.php"><span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+                    <span>COMMITTEE</span></a>
+            </li>
 
-    </div>
+        </div>
 
-    <div class="fsidenav">
-        <li id="nav-item">
-
-            <a href="#"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-                <span>SETTINGS</span></a>
-
-        </li>
-    </div>
+    
 
 </div>
 
@@ -70,12 +57,14 @@ while ($row = $result->fetch_assoc())
 
     <header>
         <div class="topnav">
-            <li id="nav-item"><a style="cursor:pointer" onclick="openNav()">&#9776;</a></li>
+        <li id="nav-item"><a style="cursor:pointer" onclick="openNav()">
+                <span class="glyphicon glyphicon-menu-hamburger">
+                </li>
 
 
-            <a href="index.html"><img id="logo" src="logo.png" height="70px" class="d-inline-block align-top" alt="logo"></a>
+            <a href="#"><img id="logo" src="logo.png" height="70px" class="d-inline-block align-top" alt="logo"></a>
             <div class="topnav-right">
-                <li id="nav-item"><a href="#">Logout</a></li>
+                <li id="nav-item"><a href="../IndexLoginSignup/logout.php">Logout</a></li>
             </div>
         </div>
 
@@ -90,22 +79,22 @@ while ($row = $result->fetch_assoc())
             with an asterisk (*)</p>
          <form action="addProjectProccess.php" method="POST">
 
-            <?php echo "<input type='hidden' name='projectID' value=".$_GET['id']."> ";?>
+
             <div class="form-group row">
               <label for="pname" class="col-sm-2 col-form-label"><span>*</span>Project Name</label>
               <div class="col-sm-10">
-                <input name="pname" type="text" class="form-control form-control-sm" id="pname" value="<?php echo $projectName?>" required>
+                <input name="pname" type="text" class="form-control form-control-sm" id="pname" placeholder="Project Name" required>
               </div>
             </div>
 
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="sdate"><span>*</span>Start Date</label>
-                <input type="date" name="startdate" class="form-control form-control-sm" id="sdate" value="<?php echo $startDate?>" required>
+                <input type="date" name="startdate" class="form-control form-control-sm" id="sdate" required>
               </div>
               <div class="form-group col-md-6">
                 <label for="edate"><span>*</span>Finish Date</label>
-                <input type="date" name="enddate" class="form-control form-control-sm" id="edate" value="<?php echo $endDate?>" required>
+                <input type="date" name="enddate" class="form-control form-control-sm" id="edate" required>
               </div>
             </div>
 
@@ -113,7 +102,8 @@ while ($row = $result->fetch_assoc())
             <div class="form-row">
               <div class="form-group col-md-4">
                 <label for="plevel"><span>*</span>Participant Level</label>
-                <select name="participantlevel" id="plevel" class="form-control form-control-sm" value="<?php echo $participantLevel?>" required>
+                <select name="participantlevel" id="plevel" class="form-control form-control-sm" required>
+                <option value="" selected disabled>Please select participant level</option>
                 <option value="University">University</option>
                   <option value="National">National</option>
                   <option value="International">International</option>
@@ -121,12 +111,13 @@ while ($row = $result->fetch_assoc())
                 </select>
               </div>
               <div class="form-group col-md-4">
-                <label for="venue">Venue</label>
-                <input type="text" name="venue" class="form-control form-control-sm" value="<?php echo $venue?>" id="venue">
+                <label for="venue"><span>*</span>Venue</label>
+                <input type="text" name="venue" class="form-control form-control-sm" id="venue" required>
               </div>
               <div class="form-group col-md-4">
-                <label for="country">Country</label>
-                <select id="country" class="form-control form-control-sm" value="<?php echo $country?>" name="country">
+                <label for="country"><span>*</span>Country</label>
+                <select id="country" class="form-control form-control-sm" name="country" required>
+                <option value="" selected disabled>Please select country</option>
                 <option value="Afganistan">Afghanistan</option>
    <option value="Albania">Albania</option>
    <option value="Algeria">Algeria</option>
@@ -375,37 +366,17 @@ while ($row = $result->fetch_assoc())
    <option value="Zimbabwe">Zimbabwe</option>
                 </select>
               </div>
-</div>
-                
-                <?php          
+            </div>
 
-$sql = "SELECT * FROM objective where projectID=$projectId";
-$result = $conn->query($sql);
-if ($result->num_rows > 0) {
-   echo "<table><tr><th>objective</th>
-   <th>Remove</th></tr>";
-   
-   while ($row = $result->fetch_assoc()) {
-
-       echo "<tr><td><input type='text' class='form-control' id='objective' name='objective[]' value=".$row['objective']."></td>
-       <td><button type='button' 
-       <span class='btn-danger glyphicon glyphicon-remove removeob' aria-hidden='true'></span></button>
-       </td></tr>";
-                   
-    }
-    echo "</table><br>";
-}?>
-          
 
             <div class="form-group row">
-                
-                  
-                
-              <label for="objective" class="col-sm-4 col-form-label">Add More Objective</label>
-              <div class="col-sm-8 Field1">
-                
-                  <button type="button" class="btn btn-info addService"><span class="glyphicon glyphicon-plus-sign"
-                      aria-hidden="true"></span>Add More</button>
+              <label for="objective" class="col-sm-2 col-form-label">Objective</label>
+              <div class="col-sm-10 Field1">
+                <div >
+                  <button type="button" class="btn-info addService"> Add Objective <span class="glyphicon glyphicon-plus-sign"
+                      aria-hidden="true"></span></button></div>
+                <!-- <input type="text" class="form-control form-control-sm" id="objective" name="objective[]"
+                  placeholder="Objective"> -->
 
               </div>
             </div>
@@ -416,28 +387,6 @@ if ($result->num_rows > 0) {
 
           <div id="tittle">List of Comittee Members</div>
 
-          <?php          
-
-            $sql = "SELECT * FROM list_committee where projectID=$projectId";
-            $result = $conn->query($sql);
-            $result = $conn->query($sql);
-if ($result->num_rows > 0) {
-   echo "<table><tr><th>Name</th>
-   <th>Position</th>
-   <th>Remove</th></tr>";
-   
-   while ($row = $result->fetch_assoc()) {
-
-       echo "<tr><td><input class='form-control' id='cccname' name='ccname[]' value=".$row['name']."></td>
-            <td><input class='form-control' id='ppmember' name='ppmember[]' value=".$row['position']."></td>  
-            <td class='table-remove'><button type'button' <span class='btn-danger glyphicon glyphicon-remove removecommittee' aria-hidden='true'></span></button></td></tr>";
-                   
-    }
-    echo "</table><br>";
-}?>
-            
-
-
  
           
 
@@ -445,7 +394,7 @@ if ($result->num_rows > 0) {
             <div class="form-row">
               <div class="form-group col-md-6">
                 <label for="rid">Name</label>
-                <input  class="form-control form-control-sm" list="committee" id="rid" name="cname">
+                <input  class="form-control form-control-sm" list="committee" id="rid" placeholder="name" value="" name="cname">
                 <datalist id="committee">
                 <?php
                 
@@ -463,16 +412,17 @@ if ($result->num_rows > 0) {
               <div class="form-group col-md-6">
                 <label for="pmember">Position</label>
                 <select id="pmember" class="form-control form-control-sm" name="pmember">
+                <option value="" selected disabled>Please select position</option>
                 <option value="Project Manager">Project Manager</option>
                   <option value="Assistant Project Manager">Assistant Project Manager</option>
                   <option value="Treasurer">Treasurer</option>
                   <option value="Vice Secretary">Vice Secretary</option>
                   <option value="Vice Treasurer">Vice Treasurer</option>
-                  <option value="Media">Media Team Leader</option>
-                  <option value="Logistic">Logistic Team Leader</option>
-                  <option value="Safety and Welfare">Safety and Welfare Team Leader</option>
-                  <option value="Registration">Registration Team Leader</option>
-                  <option value="Protocol">Protocol Team Leader</option>
+                  <option value="Media and Publicity">Media and Publicity</option>
+                  <option value="Logistic">Logistic</option>
+                  <option value="Safety and Welfare">Safety and Welfare</option>
+                  <option value="Registration">Registration</option>
+                  <option value="Protocol">Protocol</option>
                 </select>
                 <div class="pull-right">
                   <button type="button" id="add" class="btn-info"><span class="glyphicon glyphicon-plus"
@@ -496,30 +446,8 @@ if ($result->num_rows > 0) {
               </tbody>
             </table>
           </div>
+
           <div id="tittle">Activity Agenda</div>
-
-          <?php          
-
-            $sql = "SELECT * FROM agenda where projectID=$projectId ORDER BY dateevent && timeevent";
-            $result = $conn->query($sql);
-            if ($result->num_rows > 0) {
-
-                echo "<table>
-                  <thead><tr><th>Date</th>
-                <th>Time</th>
-                <th>Agenda</th>
-                <th>Remove</th></tr></thead>";
-                while ($row = $result->fetch_assoc()) {
-
-                   echo "<tr>
-                   <td><input class='form-control' id='aadate' name='aadate[]' value=".$row['dateevent']."></td>
-                   <td><input class='form-control' id='aatime' name='aatime[]' value=".$row['timeevent']."></td>
-                   <td><input class='form-control' id='aactivity' name='aactivity[]' value=".$row['activity']."></td>
-                   <td class='table-remove'><button type='button' <span class='btn-danger glyphicon glyphicon-remove removeagenda' aria-hidden='true'></span></button></td>
-                   </tr>";                
-                }
-                 echo "</table><br>";
-            }?>
 
      
 
@@ -530,7 +458,7 @@ if ($result->num_rows > 0) {
               </div>
               <div class="form-group col-md-2">
                 <label for="atime">Time</label>
-                <input type="text" name="Agenda Time" class="form-control form-control-sm" id="atime"
+                <input type="time" name="Agenda Time" class="form-control form-control-sm" id="atime"
                   placeholder="Time">
               </div>
               <div class="form-group col-md-6">
@@ -561,28 +489,22 @@ if ($result->num_rows > 0) {
 
           <div id="tittle">Income</div>
 
-          <?php          
-
-            $sql = "SELECT * FROM income where projectID=$projectId";
-            $result = $conn->query($sql);
-            if ($result->num_rows > 0) {
-
-                echo "<table>
-                  <thead><tr><th>Item</th>
-                <th>Amount</th>
-                <th>Remove</th></tr></thead>";
-                while ($row = $result->fetch_assoc()) {
-
-                   echo "<tr><td><input class='form-control' id='iitem1' name='iitem1[]' value=".$row['item']."></td>
-                         <td><input class='form-control' id='iincome' name='iincome[]' value=".$row['amount']."></td>
-                         <td><button type='button' <span class='btn-danger glyphicon glyphicon-remove removeincome' aria-hidden='true'></span></button></td></tr>";                
-                }
-                 echo "</table><br>";
-            }?>
-
-     
-
-
+          
+          <div class="form-row">
+              <div class="form-group col-md-6">
+                <label >Item</label>
+                <input class="form-control form-control-sm" type="text" id="item1" name="item income">
+              </div>
+              <div class="form-group col-md-6">
+                <label>Amount</label>
+                <input class="form-control form-control-sm" type="number" step="any" id="income" name="income">
+                <div class="pull-right">
+                <button type="button" id="Add3" class=" btn-info"><span
+                      class="glyphicon glyphicon-plus-sign"  aria-hidden="true"></span></button>
+            </div>
+              </div>
+              
+              </div>
 
           <table class="money" id="tab4">
 
@@ -593,38 +515,31 @@ if ($result->num_rows > 0) {
             </thead>
             <tbody>
 
-              <tr>
-                <td><input class="form-control form-control-sm" type="text" id="item1" name="item income"></td>
-                <td><input class="form-control form-control-sm" type="number" step="any" id="income" name="income"></td>
-                <td class="table-remove"><button type="button" id="Add3" class=" btn-info"><span
-                      class="glyphicon glyphicon-plus-sign"  aria-hidden="true"></span></button></td>
-
-              </tr>
+            
 
             </tbody>
+           
+
           </table>
 
 
           <div id="tittle">Expenditure</div>
 
-          <?php          
-
-            $sql = "SELECT * FROM expenditure where projectID=$projectId";
-            $result = $conn->query($sql);
-            if ($result->num_rows > 0) {
-
-                echo "<table>
-                  <thead><tr><th>Item</th>
-                <th>Amount</th>
-                <th>Remove</th></tr></thead>";
-                while ($row = $result->fetch_assoc()) {
-
-                   echo "<tr><td><input class='form-control' id='iitem2' name='iitem2[]' value=".$row['item']."></td>
-                   <td><input class='form-control' id='eexpenditure' name='eexpenditure[]' value=".$row['amount']."></td>
-                   <td><button type='button' <span class='btn-danger glyphicon glyphicon-remove removeexpenditure' aria-hidden='true'></span></button></td></tr>";                
-                }
-                 echo "</table><br>";
-            }?>
+          
+          <div class="form-row">
+              <div class="form-group col-md-6">
+                <label >Item</label>
+                <input class="form-control form-control-sm" type="text" id="item2" name="item2">
+              </div>
+              <div class="form-group col-md-6">
+                <label>Amount</label>
+                <input class="form-control form-control-sm" type="number" step="any" id="expenditure" name="expenditure">
+                <div class="pull-right">
+                <button type="button" id="Add4" class=" btn-info"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span></button>
+            </div>
+              </div>
+              
+              </div>
 
 
           <table class="money" id="tab5">
@@ -636,165 +551,28 @@ if ($result->num_rows > 0) {
             </thead>
             <tbody>
               <tr>
-                <td> <input class="form-control form-control-sm" type="text" id="item2" name="item expenditure" ></td>
-                <td><input class="form-control form-control-sm" type="number" step="any" id="expenditure" name="expenditure"></td>
-                <td class="table-remove"><button type="button" id="Add4" class=" btn-info"><span
-                      class="glyphicon glyphicon-plus-sign"  aria-hidden="true"></span></button></td>
+                
               </tr>
 
             </tbody>
-
-
           </table>
 
 
 
 
 
-
-          <div class="pull-right"><a href="project.html"> <button type="button"
-                class="btn btn-secondary">Back</button></a>&nbsp;<button class="btn btn-info" type="submit" name="updateProject">Save</button></div></form>
+          <!-- href='project.php?id=$userID -->
+          <div class="pull-right">
+            <?php echo "<a href='project.php'> <button type='button'
+                class='btn btn-secondary'>Back</button></a>&nbsp;<button class='btn btn-info' type='submit' name='submitProject' value='submit'>Save</button>";
+                ?>
+                </div></form>
 
 
         </div>
 
       </div>
-<!-- modal delete obj -->
-<div class="modal fade in" id="deleteObjective" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                <form action="delete.php" method="POST">    
-                <div class="modal-content">
-                    
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="ModalLongTitle">Delete Objective</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                            <div class="modal-body">
-                                <p id="deleteobjectiveID"></p>
-                                Are you sure you want to delete this objective? This process cannot be undone.
-                                <p id="projectobjectiveID" ></p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="submit" name="cancel" class="btn-secondary" data-dismiss="modal">Cancel</button>
-                                <button type="submit" name="deleteob" class="btn-danger">Delete</button>
-                            </div>
-                    </div>
-                    </form>
-                </div>
-            </div>
-            <!-- deleteCommittee -->
 
-
-        <div class="modal fade in" id="deleteCommittee" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                <form action="delete.php" method="POST">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="ModalLongTitle">Delete Committee</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        
-                            <div class="modal-body">
-                                <p id="deletecommitteeID"></p>
-                                Are you sure you want to delete this committee? This process cannot be undone.
-                                <p id="projectcommitteeID" ></p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="submit" name="cancel" class="btn-secondary" data-dismiss="modal">Cancel</button>
-                                <button type="submit" name="deleteco" class="btn-danger">Delete</button>
-                            </div>
-                    </div>
-                    </form>
-                </div>
-            </div>
-
-            <!-- delete agenda -->
-
-            <div class="modal fade in" id="deleteAgenda" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                <form action="delete.php" method="POST">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="ModalLongTitle">Delete Activity Agenda</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        
-                            <div class="modal-body">
-                                <p id="deleteagendaID"></p>
-                                Are you sure you want to delete this Activity Agenda? This process cannot be undone.
-                                <p id="projectagendaID" ></p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="submit" class="btn-secondary" data-dismiss="modal">Cancel</button>
-                                <button type="submit" name="deleteag" class="btn-danger">Delete</button>
-                            </div>
-                    </div>
-                    </form>
-                </div>
-            </div>
-
-
-            <!-- delete income -->
-
-            <div class="modal fade in" id="deleteIncome" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                <form action="delete.php" method="POST">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="ModalLongTitle">Delete Income</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        
-                            <div class="modal-body">
-                                <p id="deleteincomeID"></p>
-                                Are you sure you want to delete this Income? This process cannot be undone.
-                                <p id="projectincomeID" ></p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="submit" class="btn-secondary" data-dismiss="modal">Cancel</button>
-                                <button type="submit" name="deletein" class="btn-danger">Delete</button>
-                            </div>
-                    </div>
-                    </form>
-                </div>
-            </div>
-
-<!-- delete expenditure -->
-            <div class="modal fade in" id="deleteExpenditure" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                <form action="delete.php" method="POST">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="ModalLongTitle">Delete Expenditure</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                       
-                            <div class="modal-body">
-                                <p id="deleteexpenditureID"></p>
-                                Are you sure you want to delete this expenditure? This process cannot be undone.
-                                <p id="projectexpenditureID" ></p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="submit" class="btn-secondary" data-dismiss="modal">Cancel</button>
-                                <button type="submit" name="deleteex" class="btn-danger">Delete</button>
-                            </div>
-                        
-                    </div>
-                    </form>
-                </div>
-            </div>
-
-        
     </main>
     <footer>
       <div class="container text-center">
@@ -821,8 +599,7 @@ if ($result->num_rows > 0) {
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
-    <script type="text/javascript" src="addProject.js"></script>
-  <script type="text/javascript" src="editproject.js"></script>
+  <script type="text/javascript" src="addProject.js"></script>
   <script type="text/javascript" src="layout.js"></script>
 
 </body>

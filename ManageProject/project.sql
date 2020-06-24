@@ -6,7 +6,6 @@ CREATE TABLE project(
   projectName VARCHAR(100) NOT NULL,
   startDate DATE NOT NULL,
   endDate DATE NOT NULL,
-  status VARCHAR(50) NOT NULL,
   participantLevel VARCHAR(50) NOT NULL,
   venue VARCHAR(100),
   country VARCHAR(100),
@@ -23,11 +22,10 @@ CREATE TABLE objective(
 
 
 List_Committe in Add Project
-//need to amend refer by user id 
 CREATE TABLE list_committee(
  listID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
  projectID int not null,
-name VARCHAR(255) NOT NULL,
+ name VARCHAR(255) NOT NULL,
  position VARCHAR(100) NOT NULL,
  FOREIGN KEY (projectID) REFERENCES project(projectID)  on delete cascade
 );

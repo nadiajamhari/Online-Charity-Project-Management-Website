@@ -11,6 +11,8 @@ form{
     margin-left: 6rem;
     margin-right: 6rem;
 }
+
+
 #tittle{
     background-color:#fde8a1;
     text-align: center;
@@ -36,14 +38,13 @@ th{
     font-weight: 700;
     padding-top: 10px;
     padding-bottom: 10px;
-    border: grey solid 1px;
+    border: #ffffff solid 1px;
 }
 
 
 tbody tr td{
     padding-left:10px;
     padding-right: 10px;
-    border:grey solid 1px;
     table-layout: fixed;
     text-overflow: ellipsis;
 }

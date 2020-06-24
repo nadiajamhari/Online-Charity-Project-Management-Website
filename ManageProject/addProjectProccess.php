@@ -1,15 +1,17 @@
 <?php
 include_once("pconfig.php");
+session_start();
+$userID=$_SESSION['userID'];
+$_SESSION['login'] = true;
 
-
-$pname = $sdate = $edate  = $plevel = $venue = $country = $last_id =$objective=$ccname =$ppmember= $aadate = $aatime = $aactivity =$iitem1=$iitem2=$iincome=$eexpenditure="";
+$projectname = $sdate = $edate  = $plevel = $venue = $country = $last_id =$objective=$committeename =$ppmember= $aadate = $aatime = $aactivity =$incomeitem=$expenditureitem=$incomeamount=$expenditureamount="";
 //check submit or not
 // if(isset($_POST["submit"])){
 
 if(isset($_POST['submitProject'])){
 if(isset($_POST["pname"]) && isset($_POST["startdate"]) && isset($_POST["enddate"]) && isset($_POST["participantlevel"]) && isset($_POST["venue"]) && isset($_POST["country"])){
 
-$pname = $_POST["pname"]; 
+$projectname = $_POST["pname"]; 
 $sdate = $_POST["startdate"]; 
 $edate = $_POST["enddate"]; 
 $plevel = $_POST["participantlevel"]; 
@@ -18,8 +20,8 @@ $country =$_POST["country"];
 
 
 //insert in database that *
-$sql= "INSERT INTO project (projectName, startDate,endDate,participantLevel,venue,country)
-VALUES ('$pname','$sdate','$edate','$plevel','$venue','$country')";
+$sql= "INSERT INTO project (userID,projectName, startDate,endDate,participantLevel,venue,country)
+VALUES ('$userID','$projectname','$sdate','$edate','$plevel','$venue','$country')";
 
 if($conn->query($sql)===TRUE){
     $last_id = $conn->insert_id;
@@ -51,11 +53,11 @@ else {
 }
 //--------------------------------------
 //commitee
-if(isset($_POST["ccname"]) && isset($_POST["ppmember"])){
+if(isset($_POST["committeename"]) && isset($_POST["ppmember"])){
 
-    foreach ($_POST["ccname"] as $ccname){
+    foreach ($_POST["committeename"] as $committeename ){
         
-        $c[]=$ccname;
+        $c[]=$committeename ;
     
     }
     foreach ($_POST["ppmember"] as $ppmember){
@@ -111,25 +113,25 @@ if(isset($_POST["ccname"]) && isset($_POST["ppmember"])){
         //------------------------------------------------//
         //income
 
-            if(isset($_POST["iitem1"]) && isset($_POST["iincome"])){
+            if(isset($_POST["incomeitem"]) && isset($_POST["incomeamount"])){
 
                 $total=0;
 
-                foreach ($_POST["iitem1"] as $iitem1){
+                foreach ($_POST["incomeitem"] as $incomeitem){
                     
-                    $e[]=$iitem1;
+                    $e[]=$incomeitem;
                 
                 }
-                foreach ($_POST["iincome"] as $iincome){
+                foreach ($_POST["incomeamount"] as $incomeamount){
                     
-                    $n[]=$iincome;
-                    $total=$total+$iincome;
+                    $n[]=$incomeamount;
+                    $total=$total+$incomeamount;
 
                 
                 }
                 
                 for ($i=0 ; $i<sizeof($e);$i++){
-                    $sql = "INSERT INTO income (projectID, item,amount)
+                    $sql = "INSERT INTO income (projectID, itemincome,amountincome)
                 VALUES ('$last_id','$e[$i]','$n[$i]')";
                 
                 if($conn->query($sql)===TRUE){
@@ -141,9 +143,9 @@ if(isset($_POST["ccname"]) && isset($_POST["ppmember"])){
 
                 //insert total to total income
                 
-                $sql1 ="INSERT INTO total_income(projectID,amount) VALUES ('$last_id','$total')";
+                $sql1 ="INSERT INTO total_income(projectID,amountincome) VALUES ('$last_id','$total')";
                 if($conn->query($sql1)===TRUE){
-                    echo "total amount dapat masuk";
+                    // echo "total amount dapat masuk";
                 }
                 else {
                     echo "Error : " . $sql1 . "<br>" .$conn->error;
@@ -154,23 +156,23 @@ if(isset($_POST["ccname"]) && isset($_POST["ppmember"])){
 //----------------------------------------------------------------------
 //expenditure
 
-                if(isset($_POST["iitem2"]) && isset($_POST["eexpenditure"])){
+                if(isset($_POST["expenditureitem"]) && isset($_POST["expenditureamount"])){
                     $total=0;
 
-                    foreach ($_POST["iitem2"] as $iitem2){
+                    foreach ($_POST["expenditureitem"] as $expenditureitem){
                         
-                        $y[]=$iitem2;
+                        $y[]=$expenditureitem;
                     
                     }
-                    foreach ($_POST["eexpenditure"] as $eexpenditure){
+                    foreach ($_POST["expenditureamount"] as $expenditureamount){
                         
-                        $h[]=$eexpenditure;
-                        $total = $total + $eexpenditure;
+                        $h[]=$expenditureamount;
+                        $total = $total + $expenditureamount;
                     
                     }
                     
                     for ($i=0 ; $i<sizeof($y);$i++){
-                        $sql = "INSERT INTO expenditure (projectID, item,amount)
+                        $sql = "INSERT INTO expenditure (projectID, itemexpenditure,amountexpenditure)
                     VALUES ('$last_id','$y[$i]','$h[$i]')";
                     
                     if($conn->query($sql)===TRUE){
@@ -180,9 +182,9 @@ if(isset($_POST["ccname"]) && isset($_POST["ppmember"])){
                         echo "Error : " . $sql1 . "<br>" .$conn->error;
                     }
                     }
-                    $sql1 ="INSERT INTO total_expenditure(projectID,amount) VALUES ('$last_id','$total')";
+                    $sql1 ="INSERT INTO total_expenditure(projectID,amountexpenditure) VALUES ('$last_id','$total')";
                 if($conn->query($sql1)===TRUE){
-                    echo "total amount dapat masuk1";
+                    // echo "total amount dapat masuk1";
                 }
                 else {
                     echo "Error : " . $sql1 . "<br>" .$conn->error;
@@ -194,13 +196,13 @@ if(isset($_POST["ccname"]) && isset($_POST["ppmember"])){
     //-----------------------------------------------------
 }
 $conn->close();
-// echo "<html><script> window.location.href=\"project.php\";</script></html>";
+echo "<html><script> window.location.href=\"project.php\";</script></html>";
 }
 
 if(isset($_POST['updateProject'])){
 
  $projectID = $_POST['projectID'];
- $pname = $_POST["pname"]; 
+ $projectname = $_POST["pname"]; 
  $sdate = $_POST["startdate"]; 
  $edate = $_POST["enddate"]; 
  $plevel = $_POST["participantlevel"]; 
@@ -208,7 +210,7 @@ if(isset($_POST['updateProject'])){
  $country =$_POST["country"];
 
 //  insert part 1
-$sql = "UPDATE project SET projectName='$pname',startDate='$sdate',endDate='$edate', 
+$sql = "UPDATE project SET projectName='$projectname',startDate='$sdate',endDate='$edate', 
  participantLevel='$plevel',venue='$venue',country='$country' WHERE projectID=$projectID";
 
  if (mysqli_query($conn, $sql)) {
@@ -257,12 +259,12 @@ $sql = "DELETE FROM list_committee WHERE projectID=$projectID";
     } else {
       echo "Error deleting record: " . $conn->error;
     }
- if(isset($_POST["ccname"]) && isset($_POST["ppmember"])){
+ if(isset($_POST["committeename"]) && isset($_POST["ppmember"])){
 
 
-    foreach ($_POST["ccname"] as $ccname){
+    foreach ($_POST["committeename"] as $committeename ){
         
-        $c[]=$ccname;
+        $c[]=$committeename ;
     
     }
     foreach ($_POST["ppmember"] as $ppmember){
@@ -333,25 +335,25 @@ $sql = "DELETE FROM list_committee WHERE projectID=$projectID";
         } else {
           echo "Error deleting record: " . $conn->error;
         }
-            if(isset($_POST["iitem1"]) && isset($_POST["iincome"])){
+            if(isset($_POST["incomeitem"]) && isset($_POST["incomeamount"])){
 
                 $total=0;
           
 
-                foreach ($_POST["iitem1"] as $iitem1){
+                foreach ($_POST["incomeitem"] as $incomeitem){
                     
-                    $e[]=$iitem1;
+                    $e[]=$incomeitem;
                 
                 }
-                foreach ($_POST["iincome"] as $iincome){
+                foreach ($_POST["incomeamount"] as $incomeamount){
                     
-                    $n[]=$iincome;
-                    $total=$total+$iincome;
+                    $n[]=$incomeamount;
+                    $total=$total+$incomeamount;
                 
                 }
                 
                 for ($i=0 ; $i<sizeof($e);$i++){
-                    $sql = "INSERT INTO income (projectID, item,amount)
+                    $sql = "INSERT INTO income (projectID, itemincome,amountincome)
                 VALUES ('$projectID','$e[$i]','$n[$i]')";
                 
                 if($conn->query($sql)===TRUE){
@@ -362,7 +364,7 @@ $sql = "DELETE FROM list_committee WHERE projectID=$projectID";
                 }
                 }
 
-                $sql1 ="INSERT INTO total_income(projectID,amount) VALUES ('$projectID','$total')";
+                $sql1 ="INSERT INTO total_income(projectID,amountincome) VALUES ('$projectID','$total')";
                 if($conn->query($sql1)===TRUE){
                     // echo "total amount dapat masuk1";
                 }
@@ -382,26 +384,26 @@ $sql2 = "DELETE FROM total_expenditure where projectID=$projectID";
         echo "Error deleting record: " . $conn->error;
       }
 
-                if(isset($_POST["iitem2"]) && isset($_POST["eexpenditure"])){
+                if(isset($_POST["expenditureitem"]) && isset($_POST["expenditureamount"])){
 
                     $total=0;
 
                     
 
-                    foreach ($_POST["iitem2"] as $iitem2){
+                    foreach ($_POST["expenditureitem"] as $expenditureitem){
                         
-                        $y[]=$iitem2;
+                        $y[]=$expenditureitem;
                     
                     }
-                    foreach ($_POST["eexpenditure"] as $eexpenditure){
+                    foreach ($_POST["expenditureamount"] as $expenditureamount){
                         
-                        $h[]=$eexpenditure;
-                        $total=$total+$eexpenditure;
+                        $h[]=$expenditureamount;
+                        $total=$total+$expenditureamount;
                     
                     }
                     
                     for ($i=0 ; $i<sizeof($y);$i++){
-                        $sql = "INSERT INTO expenditure (projectID, item,amount)
+                        $sql = "INSERT INTO expenditure (projectID, itemexpenditure,amountexpenditure)
                     VALUES ('$projectID','$y[$i]','$h[$i]')";
                     
                     if($conn->query($sql)===TRUE){
@@ -411,7 +413,7 @@ $sql2 = "DELETE FROM total_expenditure where projectID=$projectID";
                         echo "Error : " . $sql . "<br>" .$conn->error;
                     }
                     }
-                    $sql1 ="INSERT INTO total_expenditure(projectID,amount) VALUES ('$projectID','$total')";
+                    $sql1 ="INSERT INTO total_expenditure(projectID,amountexpenditure) VALUES ('$projectID','$total')";
                     if($conn->query($sql1)===TRUE){
                         // echo "total amount dapat masuk1";
                     }

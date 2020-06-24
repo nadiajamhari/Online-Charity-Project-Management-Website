@@ -1,4 +1,19 @@
-<?php include_once("pconfig.php");?>
+<?php include_once("pconfig.php");
+session_start();
+$userID=$_SESSION['userID'];
+$_SESSION['login'] = true;
+
+$sql="SELECT chname from profile where userID=$userID";
+$result=$conn->query($sql);
+if($result->num_rows>0){
+    while($row=$result->fetch_assoc()){
+        $charityName=$row['chname'];
+    }
+
+}
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,6 +29,7 @@
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="layout.css">
     <link rel="stylesheet" type="text/css" href="project.css">
+    <link rel="icon" href="Favicon.png">
     <title>Project of Charity</title>
 </head>
 
@@ -24,28 +40,24 @@
 
         <div class="msidenav">
             <li id="nav-item">
-                <a href="profile.html"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                <a href="../Profile/profile.php"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                     <span>MY PROFILE</span></a>
             </li>
             <li id="nav-item">
-                <a href="project.html"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
+                <a href="../ManageProject/project.php"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
                     <span>PROJECTS</span></a>
             </li>
             <li id="nav-item">
-                <a href="volunteer.html"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+                <a href="../Volunteer/viewvolunteer.php"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
                     <span>VOLUNTEERS</span></a>
             </li>
-
-        </div>
-
-        <div class="fsidenav">
             <li id="nav-item">
-
-                <a href="#"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-                    <span>SETTINGS</span></a>
-
+                <a href="../Committee/committee.php"><span class="glyphicon glyphicon-book" aria-hidden="true"></span>
+                    <span>COMMITTEE</span></a>
             </li>
+
         </div>
+        
 
     </div>
 
@@ -53,12 +65,14 @@
 
         <header>
             <div class="topnav">
-                <li id="nav-item"><a style="cursor:pointer" onclick="openNav()">&#9776;</a></li>
+            <li id="nav-item"><a style="cursor:pointer" onclick="openNav()">
+                <span class="glyphicon glyphicon-menu-hamburger">
+                </li>
 
 
-                <a href="index.html"><img id="logo" src="logo.png" height="70px" class="d-inline-block align-top" alt="logo"></a>
+                <a href="#"><img id="logo" src="logo.png" height="70px" class="d-inline-block align-top" alt="logo"></a>
                 <div class="topnav-right">
-                    <li id="nav-item"><a href="#">Logout</a></li>
+                    <li id="nav-item"><a href="../IndexLoginSignup/logout.php">Logout</a></li>
                 </div>
             </div>
 
@@ -66,13 +80,19 @@
 
         <main class="container">
 
-            <h2>Charity Name</h2>
+            <h2><?php echo $charityName;?></h2>
 
             <!--Table Sebenar-->
 
             <div class="card">
                 <h3 class="card-header text-center font-weight-bold text-uppercase py-4">LIST OF PROJECTS</h3>
                 <div class="card-body">
+                <div class="pull-right">
+                        <a href="addNewProject.php">
+                            <button type="submit" class="btn btn-info">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                <span>Add New Project</span>
+                            </button></a></div>
                     <div class="table-editable">
                         <table class="table table-bordered table-responsive-md table-striped">
                             <thead>
@@ -87,20 +107,23 @@
                             </thead>
                             <tbody>
                             <?php
-                                $sql = "SELECT * FROM project Order by startDate DESC";
+                            
+                                $sql = "SELECT * FROM project where userID=$userID Order by startDate DESC";
                                 $result = $conn->query($sql);
                                 if ($result->num_rows > 0) {
                                     while ($row = $result->fetch_assoc()) {
                                         $id = $row['projectID'];
+                                        $startDate = $row['startDate'];
+                                         $endDate = $row['endDate'];
                                         echo "<tr><td>". $row["projectName"]." </td>";
                                         echo "<td>". $row["participantLevel"]."</td>";
-                                        echo "<td>". $row["startDate"]."</td>";
-                                        echo "<td>". $row["endDate"]." </td>";
-                                        echo "<td><li><a href='MeetingList.html'>View meeting</a></li>
-                                            <li><a href='assignProject.html'>View volunteer</a></li></td>";
-                                        echo "<td><button class='btn-default a-btn-slide-text'><a href='viewProject.php?id=$id'><span class='glyphicon glyphicon-eye-open'
-                                        aria-hidden='true'></span></a>
-                                        </button>&nbsp;
+                                        echo "<td>".date('d/m/Y',strtotime($startDate))."</td>";
+                                        echo "<td>".date('d/m/Y',strtotime($endDate))."</td>";
+                                        echo "<td><li><a href='../meeting/meetinglist.php?id=$id'>View meeting</a></li>
+                                            <li><a href='../assignProject/assignProject.php?id=$id'>View volunteer</a></li></td>";
+                                        echo "<td><a href='viewProject.php?id=$id' alt='view'><button class='btn-default a-btn-slide-text'><span class='glyphicon glyphicon-folder-open'
+                                        aria-hidden='true'></span>
+                                        </button></a>&nbsp;
                                         <button type='button' class='btn-danger a-btn-slide-text' 
                                         data-deleteid=".$id."><span class='glyphicon glyphicon-trash' 
                                         aria-hidden='true'></span>
@@ -113,12 +136,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="pull-right">
-                        <a href="addNewProject.php">
-                            <button type="submit" class="btn btn-info">
-                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                                <span>Add New Project</span>
-                            </button></a></div>
+                   
                 </div>
             </div>
 

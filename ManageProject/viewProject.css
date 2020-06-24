@@ -6,11 +6,7 @@ table{
     padding:10px;
     margin-bottom: 2rem;
 }
-table tr :nth-child(1){
 
-    font-weight: 700;
-
-}
 table tr td{
     padding:10px;
     border-bottom: 1px #ddd solid;
