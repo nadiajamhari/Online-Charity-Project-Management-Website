@@ -1,0 +1,50 @@
+h2{
+    text-align: center;
+    padding: 10px 10px;
+}
+
+th{
+    text-align: center;
+    background-color: #d3aa9e;
+    font-family: sans-serif;
+    font-weight: 700;
+}
+.table tr td:nth-child(5) {
+    text-align: center;
+    
+  }
+
+.table tr td:nth-child(6) {
+    text-align: center;
+  }
+.table a{
+    color: black;
+}
+.table tr td a:hover{
+    text-decoration: none;
+    color: maroon;
+}
+.pull-right {
+    float: right!important;
+    padding-bottom:10px;
+}
+.card-header{
+    background-color: rgb(255, 139, 112); 
+    color:white;
+}
+
+#date{
+    width:110px;
+}
+#action{
+    width: 90px;
+    align-items: center;
+}
+
+#part-meet{
+    width:150px;
+}
+.fixed-top{
+    position: absolute;
+    top:0;
+}
