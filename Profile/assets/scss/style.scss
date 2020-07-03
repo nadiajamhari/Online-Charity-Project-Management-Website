@@ -1,0 +1,522 @@
+/* =======================================================================
+Template Name: Dil Hospital
+Author:  SmartEye Adminpanel
+Author URI: www.smarteyeapps.com
+Version: 1.0
+coder name:Prabin Raja
+Description: This Template is created for web template
+======================================================================= */
+
+/* ===================================== Import Less ================================== */
+@import 'variable';
+/* ===================================== Basic CSS ================================== */
+
+* {
+    margin: 0px;
+    padding: 0px;
+    list-style: none;
+
+}
+img {
+    max-width: 100%;
+}
+
+a {
+    text-decoration: none;
+    outline: none;
+    color: #444;
+}
+
+a:hover {
+    color: #444;
+}
+
+ul {
+    margin-bottom: 0;
+    padding-left: 0;
+}
+
+a:hover,
+a:focus,
+input,
+textarea {
+    text-decoration: none;
+    outline: none;
+}
+.center{
+    text-align: center;
+}
+.left{
+    text-align: left;
+}
+.right{
+    text-align: right;
+}
+.cp {
+    cursor: pointer
+}
+html,body{
+    height: 100%;
+}
+p {
+    margin-bottom: 0px;
+    width: 100%;
+}
+.no-padding {
+    padding: 0px;
+}
+
+.no-margin {
+    margin: 0px;
+
+}
+.hid{
+    display: none;
+}
+.top-mar{
+    margin-top: 15px;
+}
+.h-100{
+    height: 100%;;
+}
+::placeholder {
+    color: #747f8a !important;
+    font-size: 13px;
+    opacity: .5 !important;
+}
+.container-fluid{
+    padding: 0px;
+}
+h1,h2,h3,h4,h5,h6{
+	font-family: $mouse-500;
+}
+strong{
+	font-family: $mouse-500;
+}
+body{
+    background-color:#f7f7ff !important;
+    font-family: $mouse-300;
+   color: #6A6A6A;
+
+}
+
+.session-title{
+	padding: 30px;
+	margin: 0px;
+	h2{
+		width: 100%;
+		text-align: center;
+
+	}
+	p{
+		max-width: 850px;
+		text-align: center;
+		float: none;
+		margin: auto;
+	}
+	span{
+		float: right;
+		font-style: italic;
+	}
+}
+.inner-title{
+	padding: 20px;
+	padding-left: 0px;
+    margin-bottom: 30px;
+	h2{
+		width: 100%;
+		text-align: center;
+		font-size: 2rem;
+		font-family: $slab;
+	}
+	p{
+		width: 100%;
+		text-align: center;
+	}
+}
+.page-nav{
+    padding: 40px;text-align: center;
+    padding-top: 160px;
+    ul{float: none;margin: auto;}
+    
+     @media screen and (max-width: 409px){
+         
+    }
+    h2{
+        font-size: 36px;
+        width: 100%;
+        color: #444;
+        @media screen and (max-width: 600px){
+            font-size: 26px;
+        }
+    }
+    ul li{
+        float: left;
+        margin-right: 10px;
+        margin-top: 10px;
+        font-size: 16px;
+        i{
+            width: 30px;
+            text-align: center;
+            color: #444;
+           
+        }
+        a{
+            color: #444;
+        }
+    }
+}
+.btn-success{
+	background-color: #00ab9f;
+	border-color: #00ab9f;
+	&:hover{
+		background-color: #00ab9f !important;
+		border-color: #00ab9f !important;
+	}
+	&:active{
+		background-color: #00ab9f !important;
+		border-color: #00ab9f !important;
+	}
+	&:focus{
+		background-color: #00ab9f !important;
+		border-color: #00ab9f !important;
+		box-shadow: none !important;
+	}
+}
+.btn-info{
+	background-color: #4f6dcd;
+	border-color: #4f6dcd;
+	&:hover{
+		background-color: #4f6dcd !important;
+		border-color: #4f6dcd !important;
+	}
+	&:active{
+		background-color: #4f6dcd !important;
+		border-color: #4f6dcd !important;
+	}
+	&:focus{
+		background-color: #4f6dcd !important;
+		border-color: #4f6dcd !important;
+		box-shadow: none !important;
+	}
+}
+.btn{
+	@include card-1();
+}
+.form-control{
+	&:focus{
+		box-shadow: none !important;
+		border:2px solid  #00a8df;
+	}
+
+}
+.btn-light{
+	background-color: #FFF;
+	color: #3F3F3F;
+}
+
+.collapse.show {
+
+    display: block !important;
+
+}
+
+.form-control:focus{
+	box-shadow: none;
+	border: 2px solid #0d7a40 !important;
+}
+.form-control{
+	background-color: #F8F8F8;
+	margin-bottom: 20px;
+	&:focus{
+		background-color: #FFF;
+		border-color: #CCC;
+	}
+}
+.container{
+    max-width: 1100px;
+}
+/* ===================================== Header CSS ================================== */
+
+.cover{
+    background-image: url('../images/bg_2.jpg');
+    background-size: cover;
+    width: 100%;
+    height: 250px;
+    .cover-layer{
+        position: absolute;
+        width: 100%;
+        height: 250px;
+        background-color: rgba(0,0,0,0.3);
+        padding: 15px;
+    }
+}
+.web-portion{
+    @include shado-1();
+    background-color: #FFF;
+    margin-top: 118px;
+    padding: 0px;
+     margin-bottom: 50px;
+    
+}
+.profil-det-img{
+    @media screen and (max-width:767px){
+        border-bottom: 1px solid #CCCCCCB3;
+    }
+    .dp{
+        padding: 15px;
+        padding-right: 5px;
+        img{
+            border-radius: 50px;
+            width: 80px;
+            @media screen and (max-width:850px){
+                width: 60px;
+            }
+        }
+    }
+    .pd{
+        padding: 10px;
+        vertical-align: middle;
+        margin: auto 0;
+        h2{
+            font-size: 22px;
+            margin-bottom: 0px;
+            @media screen and (max-width:850px){
+                font-size: 18px;
+            }
+        }
+        p{
+            font-size: 14px;
+        }
+    }
+    
+}
+.eml-mob{
+     border-right: 1px solid #CCC;
+    border-left: 1px solid #CCC;
+    @media screen and (max-width:767px){
+        border-bottom: 1px solid #CCCCCCB3;
+        padding: 5px 30px;
+        margin-top: 0px;
+    }
+    ul{
+        padding: 0px;
+        margin-left: 0px;
+        margin-top: 21px;
+        @media screen and (max-width:767px){
+            margin-top: 0px !important;
+        }
+        @media screen and (max-width:850px){
+            margin-top: 13px;
+        }
+        li{
+            padding: 5px 10px;
+            font-size: 16px;
+            padding-left: 0px;
+            @media screen and (max-width:850px){
+                font-size: 14px;
+            }
+            i{
+                font-size: 18px;
+                margin-right: 10px;
+            }
+        }
+    }
+}
+.map-mark{
+    i{
+        padding: 10px;
+        margin: auto;
+        font-size: 44px;
+        padding-left: 0px;
+        margin-right: 10px;
+        @media screen and (max-width:850px){
+            font-size: 32px;
+        }
+    }
+    p{
+        font-size: 16px;
+        margin: auto 0;
+        padding-right: 15px;
+        @media screen and (max-width:850px){
+            font-size: 14px;
+        }
+    }
+    @media screen and (max-width:767px){
+        padding-left: 30px;
+    }
+}
+.nav-detail{
+    .nav-tabs{
+        background-color: #cccccc47;
+        .nav-link{
+            padding: 10px 40px;
+            font-weight: 300;
+            @media screen and (max-width:746px){
+                padding: 10px 20px;
+            }
+            @media screen and (max-width:544px){
+                padding: 10px;
+            }
+            @media screen and (max-width:448px){
+                font-size: 14px;
+            }
+            @media screen and (max-width:406px){
+                padding: 10px 5px;
+                font-size: 13px;
+            }
+        }
+        .nav-link.active{
+             background-color: #cccccc47;
+            border-top: 0px;
+            border-bottom: 3px solid #00ab9f;
+        }
+    }
+}
+.home-det{
+    .big-img{
+        border-right: 1px solid #cccccc82;;
+        padding: 15px;
+        text-align: center;
+    }
+    .home-dat{
+        padding: 25px;
+        h3{
+            font-style: 22px;
+        }
+        p{
+            text-indent: 20px;
+            font-size: 15px;
+        }
+        .links{
+                padding: 50px 0px;
+                .btn-link li{
+                    float: left;
+                    padding: 5px 10px;
+                    border-radius: 15px;
+                    border:1px solid #888;
+                    margin-right: 10px;
+                    color: #888;
+                    @media screen and (max-width:483px){
+                        margin-right: 5px !important;
+                        width: 100%;
+                        margin-bottom: 10px;
+                    }
+                    i{
+                        margin-top: 5px;
+                    }
+                    a{
+                        color: #888;
+                    }
+                }
+                .social-link{
+                    float: right;
+                    li{
+                        float: left;
+                        padding: 5px;
+                        border:1px solid #888;
+                        border-radius: 50px;
+                        width: 35px;
+                        text-align: center;
+                        margin-right: 10px;
+                        @media screen and (max-width:483px){
+                            margin-right: 5px !important;
+                            margin-top: 20px;
+                        }
+                    }
+                }
+                @media screen and (max-width:1200px){
+                    padding: 20px 0px;
+                    .social-link{
+                        margin-top: 20px;
+                    }
+                }
+            }
+        .addrss-list{
+            width: 100%;
+            tr{
+                border-left: 1px solid #CCC;
+                td{
+                    padding: 13px 10px;
+                    border: 1px solid #CCC;
+                }
+                th{
+                    border-top: 1px solid #CCC;
+                    border-bottom: 1px solid #CCC;
+                    padding: 13px 10px;
+                    @media screen and (max-width:1200px){
+                        width: 200px;
+                    }
+                    @media screen and (max-width:450px){
+                        width: 120px;
+                    }
+                }
+            }
+        }
+    }
+}
+.profile-tab{
+     @include big-padding();
+    .profile-desic{
+        text-align: center;
+    }
+    .sec-title{
+        padding: 20px;
+        text-align: center;
+        font-size: 22px;
+    }
+    .service-ro{
+        .singe-servic{
+            text-align: center;
+            margin-bottom: 25px;
+            margin-top: 10px;
+            i{
+                font-size: 42px;
+                margin-bottom: 20px;
+                color: #00ab9f;
+            }
+            h4{
+                font-size: 19px;
+                margin-bottom: 10px;
+            }
+            p{
+                font-size: 14px;
+            }
+        }
+    }
+}
+.education-detail{
+    @include big-padding();
+    .sec-title{
+        padding: 20px;
+        text-align: center;
+        font-size: 22px;
+    }
+    .service{
+        padding: 20px;
+        .resume-dat{
+            text-align: center;
+        }
+    }
+}
+.portfolio-detail{
+    padding: 20px;
+    .gallery{
+        img{
+            margin-top: 20px;
+        }
+    }
+}
+.contact-tab{
+    padding: 20px;
+    iframe{
+        width: 100%;
+        height: 400px;
+    }
+}
+
+@media screen and (max-width:575px){
+    .rgbf{
+        text-align: center;
+    }
+}

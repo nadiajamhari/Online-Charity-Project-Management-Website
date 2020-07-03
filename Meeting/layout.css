@@ -1,0 +1,123 @@
+html{
+    font-family: "mouse-500", Arial, Helvetica, sans-serif;
+    font-size: 100%;
+    height: 100%;
+}
+body{
+    font-family: sans-serif;
+    min-height: 100vh;
+    
+}
+
+footer {
+    background-color: #F2BC94;
+}
+
+
+li{
+    list-style: none;
+}
+
+.container{
+    padding: 20px;
+    height: 100%;
+}
+
+.sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #F2BC94;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+/* ADD ON CSS SIDENAV BARU */
+.msidenav{
+    height: 90%;
+}
+
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #000000;
+    display: block;
+    transition: 0.3s;
+    
+}
+
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+
+    .sidenav a {
+        font-size: 18px;
+    }
+}
+
+/* Add a black background color to the top navigation */
+.topnav {
+    background-coloR:#F2BC94;
+    overflow: hidden;
+    height: 70px;
+    
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: left;
+  color: #000000;
+  text-align: center;
+  
+  padding: 22px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  height: 70px;
+}
+/* Right-aligned section inside the top navigation */
+.topnav-right{
+    float:right;
+}
+
+/* Change the color of links on hover */
+#nav-item :hover {
+    
+    background-color:  #30110d;
+    color:#ffffff
+}
+/*fixed the position of logo*/
+#logo{
+    position: relative;
+    bottom: 23px;
+    padding: 5px 5px 5px 5px;}
+
+#main {
+    
+    height: 100%;
+    width: auto;
+    transition: margin-left .5s;
+    padding: 16px;
+    
+}
+/* Delete modal box */
+
+
+
